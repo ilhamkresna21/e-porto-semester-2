@@ -682,6 +682,182 @@ html[data-theme="dark"] .icon-moon { display: block; }
 .modal__meta p { color: var(--text-soft); font-size: .88rem; }
 
 /* ============================================================
+   VARIASI WARNA PER SECTION + ELEMEN VISUAL BARU
+   ============================================================ */
+:root {
+  --c-indigo: #4f46e5;
+  --c-emerald: #059669;
+  --c-amber: #d97706;
+  --c-orange: #ea580c;
+  --c-rose: #e11d48;
+  --c-violet: #7c3aed;
+  --c-teal: #0d9488;
+  --c-sky: #0284c7;
+  --c-blue: #2563eb;
+}
+
+/* Palet aksen tiap section (terang) */
+.acc-profil    { --primary: #4f46e5; --accent: #0ea5e9; }
+.acc-daerah    { --primary: #059669; --accent: #14b8a6; }
+.acc-inspirasi { --primary: #d97706; --accent: #f97316; }
+.acc-artefak   { --primary: #0284c7; --accent: #6366f1; }
+.acc-video     { --primary: #e11d48; --accent: #f97316; }
+.acc-lampiran  { --primary: #7c3aed; --accent: #db2777; }
+.acc-model     { --primary: #0d9488; --accent: #84cc16; }
+.acc-refleksi  { --primary: #2563eb; --accent: #7c3aed; }
+
+/* Palet aksen tiap section (gelap — warna lebih terang) */
+html[data-theme="dark"] .acc-profil    { --primary: #818cf8; --accent: #38bdf8; }
+html[data-theme="dark"] .acc-daerah    { --primary: #34d399; --accent: #5eead4; }
+html[data-theme="dark"] .acc-inspirasi { --primary: #fbbf24; --accent: #fdba74; }
+html[data-theme="dark"] .acc-artefak   { --primary: #38bdf8; --accent: #818cf8; }
+html[data-theme="dark"] .acc-video     { --primary: #fb7185; --accent: #fdba74; }
+html[data-theme="dark"] .acc-lampiran  { --primary: #a78bfa; --accent: #f472b6; }
+html[data-theme="dark"] .acc-model     { --primary: #2dd4bf; --accent: #a3e635; }
+html[data-theme="dark"] .acc-refleksi  { --primary: #60a5fa; --accent: #a78bfa; }
+
+/* ---------- Blob hero tambahan (warna hangat) ---------- */
+.hero__blob--3 { width: 300px; height: 300px; top: 40%; left: 44%; background: #f59e0b; opacity: .18; }
+
+/* ---------- Kartu fakta hero: bar warna kiri ---------- */
+.hero__facts li { border-left: 4px solid var(--c-indigo); }
+.hero__facts li:nth-child(2) { border-left-color: var(--c-emerald); }
+.hero__facts li:nth-child(3) { border-left-color: var(--c-amber); }
+
+/* ---------- Timeline: titik warna-warni ---------- */
+.timeline__item:nth-child(4n+1) .timeline__year { color: var(--c-indigo); }
+.timeline__item:nth-child(4n+1) .timeline__year::after { background: var(--c-indigo); }
+.timeline__item:nth-child(4n+2) .timeline__year { color: var(--c-emerald); }
+.timeline__item:nth-child(4n+2) .timeline__year::after { background: var(--c-emerald); }
+.timeline__item:nth-child(4n+3) .timeline__year { color: var(--c-amber); }
+.timeline__item:nth-child(4n+3) .timeline__year::after { background: var(--c-amber); }
+.timeline__item:nth-child(4n)   .timeline__year { color: var(--c-rose); }
+.timeline__item:nth-child(4n)   .timeline__year::after { background: var(--c-rose); }
+
+/* ---------- Kartu keunikan daerah: tag kategori + aksen per kartu ---------- */
+.feature__img { position: relative; }
+.feature__tag {
+  position: absolute;
+  left: 14px; bottom: 14px;
+  padding: 5px 13px;
+  border-radius: 999px;
+  background: rgba(12, 18, 38, .74);
+  backdrop-filter: blur(5px);
+  color: #fff;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+.feature:nth-child(1) { --fc: #7c3aed; }
+.feature:nth-child(2) { --fc: #059669; }
+.feature:nth-child(3) { --fc: #ea580c; }
+.feature:nth-child(4) { --fc: #d97706; }
+html[data-theme="dark"] .feature:nth-child(1) { --fc: #a78bfa; }
+html[data-theme="dark"] .feature:nth-child(2) { --fc: #34d399; }
+html[data-theme="dark"] .feature:nth-child(3) { --fc: #fb923c; }
+html[data-theme="dark"] .feature:nth-child(4) { --fc: #fbbf24; }
+.feature__body h3 { color: var(--fc, var(--primary)); }
+.feature:hover { border-color: var(--fc, var(--primary)); }
+
+/* ---------- Blok kutipan: tanda kutip besar ---------- */
+.quote { position: relative; overflow: hidden; }
+.quote::before {
+  content: "“";
+  position: absolute;
+  top: -34px; left: 26px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 8rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, .22);
+  pointer-events: none;
+}
+
+/* ---------- Keahlian (section Profil) ---------- */
+.skills { display: grid; gap: 14px; }
+.skill-row {
+  display: grid;
+  grid-template-columns: 210px 1fr;
+  gap: 16px;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+}
+.skill-row h4 {
+  font-size: .78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--text-soft);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.skill-row h4::before {
+  content: "";
+  width: 10px; height: 10px;
+  border-radius: 3px;
+  background: var(--sc, var(--primary));
+}
+.skill-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.skill-row:nth-child(1) { --sc: var(--c-indigo); }
+.skill-row:nth-child(2) { --sc: var(--c-teal); }
+.skill-row:nth-child(3) { --sc: var(--c-rose); }
+html[data-theme="dark"] .skill-row:nth-child(1) { --sc: #818cf8; }
+html[data-theme="dark"] .skill-row:nth-child(2) { --sc: #2dd4bf; }
+html[data-theme="dark"] .skill-row:nth-child(3) { --sc: #fb7185; }
+
+.pill {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: .82rem;
+  font-weight: 600;
+  background: color-mix(in srgb, var(--sc, var(--primary)) 12%, transparent);
+  color: var(--sc, var(--primary));
+  border: 1px solid color-mix(in srgb, var(--sc, var(--primary)) 30%, transparent);
+  transition: .25s;
+}
+.pill:hover { transform: translateY(-2px); background: color-mix(in srgb, var(--sc, var(--primary)) 20%, transparent); }
+
+/* ---------- Misi: chip nomor warna-warni ---------- */
+.mini-card:nth-child(6n+1) .mini-card__num { background: #e0e7ff; color: #4338ca; }
+.mini-card:nth-child(6n+2) .mini-card__num { background: #d1fae5; color: #047857; }
+.mini-card:nth-child(6n+3) .mini-card__num { background: #fef3c7; color: #b45309; }
+.mini-card:nth-child(6n+4) .mini-card__num { background: #ffe4e6; color: #be123c; }
+.mini-card:nth-child(6n+5) .mini-card__num { background: #cffafe; color: #0e7490; }
+.mini-card:nth-child(6n)   .mini-card__num { background: #ede9fe; color: #6d28d9; }
+html[data-theme="dark"] .mini-card:nth-child(6n+1) .mini-card__num { background: #2b3366; color: #a5b4fc; }
+html[data-theme="dark"] .mini-card:nth-child(6n+2) .mini-card__num { background: #14352b; color: #6ee7b7; }
+html[data-theme="dark"] .mini-card:nth-child(6n+3) .mini-card__num { background: #3a2e12; color: #fcd34d; }
+html[data-theme="dark"] .mini-card:nth-child(6n+4) .mini-card__num { background: #3d1520; color: #fda4af; }
+html[data-theme="dark"] .mini-card:nth-child(6n+5) .mini-card__num { background: #10333d; color: #67e8f9; }
+html[data-theme="dark"] .mini-card:nth-child(6n)   .mini-card__num { background: #2c2150; color: #c4b5fd; }
+
+/* ---------- Kompetensi & karakter: garis atas warna-warni ---------- */
+.comp-card:nth-child(4n+1) { border-top: 4px solid var(--c-sky); }
+.comp-card:nth-child(4n+2) { border-top: 4px solid var(--c-emerald); }
+.comp-card:nth-child(4n+3) { border-top: 4px solid var(--c-amber); }
+.comp-card:nth-child(4n)   { border-top: 4px solid var(--c-violet); }
+.char-card:nth-child(6n+1) { border-top: 4px solid var(--c-rose); }
+.char-card:nth-child(6n+2) { border-top: 4px solid var(--c-violet); }
+.char-card:nth-child(6n+3) { border-top: 4px solid var(--c-teal); }
+.char-card:nth-child(6n+4) { border-top: 4px solid var(--c-orange); }
+.char-card:nth-child(6n+5) { border-top: 4px solid var(--c-blue); }
+.char-card:nth-child(6n)   { border-top: 4px solid var(--c-emerald); }
+
+/* ---------- Kartu lampiran: ikon berkotak warna ---------- */
+.link-card__icon {
+  width: 58px; height: 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 17px;
+  background: var(--primary-soft);
+  border: 1px solid color-mix(in srgb, var(--primary) 25%, transparent);
+  font-size: 1.6rem;
+}
+
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 @media (max-width: 1024px) {
@@ -718,6 +894,7 @@ html[data-theme="dark"] .icon-moon { display: block; }
 
 @media (max-width: 560px) {
   .section { padding: 62px 0; }
+  .skill-row { grid-template-columns: 1fr; gap: 10px; }
   .grid-4, .artefak-grid, .video-grid { grid-template-columns: 1fr; }
   .hero__facts li { flex: 1 1 100%; }
   .quote { padding: 30px 22px; }
