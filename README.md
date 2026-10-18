@@ -19,6 +19,24 @@ lengkap ke situs ini.
 └── README.md
 ```
 
+## Menambahkan video mengajar
+
+Buka `js/script.js`, cari daftar `VIDEOS`, lalu tambahkan link Anda:
+
+```js
+const VIDEOS = [
+  { title: "Praktik Mengajar Siklus 1", desc: "Materi Algoritma & Flowchart",
+    url: "https://youtu.be/XXXXXXXXXXX" },
+  { title: "Praktik Mengajar Siklus 2", desc: "Materi HTML",
+    url: "https://drive.google.com/file/d/FILE_ID/view" },
+];
+```
+
+- **YouTube** — dukung `youtu.be/...`, `watch?v=...`, dan `shorts/...` (thumbnail diambil otomatis).
+- **Google Drive** — dukung `/file/d/...` dan `?id=...`. **Penting:** set video ke akses *Anyone with the link* agar bisa ditonton dari situs.
+- Video tampil sebagai kartu thumbnail, diklik → player muncul di modal (tanpa pindah halaman).
+- Selama daftar `VIDEOS` masih kosong, section menampilkan pesan "Belum ada video yang ditautkan".
+
 ## Cara menjalankan
 
 Cara termudah: buka `index.html` langsung di browser (double-click).

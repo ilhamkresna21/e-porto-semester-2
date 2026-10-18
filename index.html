@@ -30,6 +30,7 @@
         <a href="#daerah" class="nav-link">Keunikan Daerah</a>
         <a href="#inspirasi" class="nav-link">Inspirasi</a>
         <a href="#artefak" class="nav-link">Artefak</a>
+        <a href="#video" class="nav-link">Video</a>
         <a href="#lampiran" class="nav-link">Lampiran</a>
         <a href="#model-guru" class="nav-link">Model Guru</a>
         <a href="#refleksi" class="nav-link">Refleksi</a>
@@ -360,8 +361,48 @@
       </div>
     </section>
 
+    <!-- ============ VIDEO MENGAJAR ============ -->
+    <section class="section" id="video">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <span class="section-label">Dokumentasi</span>
+          <h2>Video Mengajar</h2>
+          <p class="section-sub">
+            Rekaman praktik mengajar saya selama program PPG — bukti nyata penerapan perencanaan
+            pembelajaran, manajemen kelas, dan interaksi dengan murid. Klik thumbnail untuk menonton.
+          </p>
+        </header>
+
+        <div class="video-grid" id="videoGrid" data-reveal>
+          <!-- Kartu video dibuat oleh js/script.js dari daftar VIDEOS -->
+        </div>
+
+        <div class="video-empty card" id="videoEmpty">
+          <span class="video-empty__icon">🎬</span>
+          <h3>Belum ada video yang ditautkan</h3>
+          <p>
+            Kirimkan link <strong>YouTube</strong> atau <strong>Google Drive</strong> video mengajar Anda —
+            nanti akan tampil sebagai kartu thumbnail di sini dan bisa ditonton langsung di halaman.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal player video -->
+    <div class="modal" id="videoModal" aria-hidden="true">
+      <div class="modal__backdrop" data-close></div>
+      <div class="modal__dialog" role="dialog" aria-modal="true" aria-label="Pemutar video">
+        <button class="modal__close" data-close aria-label="Tutup video">✕</button>
+        <div class="modal__frame" id="modalFrame"></div>
+        <div class="modal__meta">
+          <h3 id="modalTitle"></h3>
+          <p id="modalDesc"></p>
+        </div>
+      </div>
+    </div>
+
     <!-- ============ LAMPIRAN ============ -->
-    <section class="section" id="lampiran">
+    <section class="section section--alt" id="lampiran">
       <div class="container">
         <header class="section-head" data-reveal>
           <span class="section-label">Dokumen Pendukung</span>
@@ -395,7 +436,7 @@
     </section>
 
     <!-- ============ MODEL GURU ============ -->
-    <section class="section section--alt" id="model-guru">
+    <section class="section" id="model-guru">
       <div class="container">
         <header class="section-head" data-reveal>
           <span class="section-label">Visi & Misi</span>
@@ -444,7 +485,7 @@
     </section>
 
     <!-- ============ REFLEKSI ============ -->
-    <section class="section" id="refleksi">
+    <section class="section section--alt" id="refleksi">
       <div class="container">
         <header class="section-head" data-reveal>
           <span class="section-label">Introspeksi Diri</span>
@@ -516,6 +557,7 @@
         <h4>Menu</h4>
         <a href="#profil">Profil</a>
         <a href="#artefak">Artefak Produk</a>
+        <a href="#video">Video Mengajar</a>
         <a href="#model-guru">Model Guru</a>
         <a href="#refleksi">Refleksi</a>
       </div>

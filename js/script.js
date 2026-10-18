@@ -232,10 +232,133 @@ function initYear() {
   document.getElementById("year").textContent = new Date().getFullYear();
 }
 
+/* ============================================================
+   VIDEO MENGAJAR
+   Tambahkan link video di daftar VIDEOS di bawah ini.
+   Dukungan: YouTube (watch / youtu.be / shorts) & Google Drive.
+   Contoh:
+     { title: "Praktik Mengajar Siklus 1", desc: "Materi Algoritma",
+       url: "https://youtu.be/XXXXXXXXXXX" }
+     { title: "Video dari Drive", desc: "...",
+       url: "https://drive.google.com/file/d/FILE_ID/view" }
+   ============================================================ */
+const VIDEOS = [
+  // { title: "", desc: "", url: "" },
+];
+
+/* ---------- Ekstrak ID video ---------- */
+function getYouTubeId(url) {
+  const m =
+    url.match(/(?:youtu\.be\/)([\w-]{6,})/) ||
+    url.match(/[?&]v=([\w-]{6,})/) ||
+    url.match(/shorts\/([\w-]{6,})/) ||
+    url.match(/embed\/([\w-]{6,})/);
+  return m ? m[1] : null;
+}
+
+function getDriveId(url) {
+  const m =
+    url.match(/\/file\/d\/([\w-]{10,})/) ||
+    url.match(/[?&]id=([\w-]{10,})/) ||
+    url.match(/\/d\/([\w-]{10,})/);
+  return m ? m[1] : null;
+}
+
+function getVideoMeta(video) {
+  const yt = getYouTubeId(video.url);
+  if (yt) {
+    return {
+      type: "YouTube",
+      embed: `https://www.youtube-nocookie.com/embed/${yt}?autoplay=1&rel=0`,
+      thumb: `https://img.youtube.com/vi/${yt}/hqdefault.jpg`,
+    };
+  }
+  const drive = getDriveId(video.url);
+  if (drive) {
+    return {
+      type: "Drive",
+      embed: `https://drive.google.com/file/d/${drive}/preview`,
+      thumb: "assets/img/placeholder-teaching.svg",
+    };
+  }
+  return null;
+}
+
+/* ---------- Render kartu video ---------- */
+function renderVideos() {
+  const grid = document.getElementById("videoGrid");
+  const empty = document.getElementById("videoEmpty");
+  if (!grid || !empty) return;
+
+  const valid = VIDEOS.filter((v) => getVideoMeta(v));
+  empty.hidden = valid.length > 0;
+  if (!valid.length) return;
+
+  valid.forEach((video, i) => {
+    const meta = getVideoMeta(video);
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "video-card card";
+    card.setAttribute("data-index", String(i));
+    card.innerHTML =
+      '<div class="video-card__thumb">' +
+      `<img src="${meta.thumb}" alt="${video.title || "Video mengajar"}" loading="lazy" ` +
+      `onerror="this.onerror=null;this.src='assets/img/placeholder-teaching.svg';">` +
+      `<span class="video-card__badge${meta.type === "Drive" ? " video-card__badge--drive" : ""}">${meta.type}</span>` +
+      '<span class="video-card__play"><span>▶</span></span>' +
+      "</div>" +
+      '<div class="video-card__body">' +
+      `<h3>${video.title || "Video Mengajar"}</h3>` +
+      `<p>${video.desc || ""}</p>` +
+      "</div>";
+    card.addEventListener("click", () => openVideo(valid[i]));
+    grid.appendChild(card);
+  });
+}
+
+/* ---------- Modal player ---------- */
+function openVideo(video) {
+  const meta = getVideoMeta(video);
+  if (!meta) return;
+
+  const modal = document.getElementById("videoModal");
+  document.getElementById("modalFrame").innerHTML =
+    `<iframe src="${meta.embed}" title="${video.title || "Video Mengajar"}" ` +
+    'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ' +
+    "allowfullscreen></iframe>";
+  document.getElementById("modalTitle").textContent = video.title || "Video Mengajar";
+  document.getElementById("modalDesc").textContent = video.desc || "";
+
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+}
+
+function closeVideo() {
+  const modal = document.getElementById("videoModal");
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden", "true");
+  document.getElementById("modalFrame").innerHTML = "";
+  document.body.style.overflow = "";
+}
+
+function initVideoModal() {
+  const modal = document.getElementById("videoModal");
+  if (!modal) return;
+  modal.querySelectorAll("[data-close]").forEach((el) =>
+    el.addEventListener("click", closeVideo)
+  );
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeVideo();
+  });
+}
+
 /* ---------- Boot ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   renderArtefak();
   initTabs();
+  renderVideos();
+  initVideoModal();
   initNavbar();
   initMobileMenu();
   initScrollSpy();
