@@ -57,7 +57,8 @@ Buka `js/script.js`, cari daftar `ARTEFAK_ITEMS`. Setiap item punya:
   ID-nya adalah bagian `1AbC...XYZ`.
 - Set file Drive ke akses **"Anyone with the link"** agar bisa ditampilkan.
 - Selama `driveId` masih kosong, modal menampilkan placeholder "belum ditautkan"
-  plus deskripsi & tautan sumber asli di Google Sites.
+  beserta deskripsi dokumennya. Prinsip situs ini: **semua dokumen tampil di dalam
+  situs sendiri — tanpa tautan ke Google Sites lama.**
 - `images` untuk galeri foto pendukung (letakkan fotonya di `assets/img/`).
 
 ## Cara menjalankan
@@ -92,9 +93,9 @@ Jika file tidak ada, gambar otomatis menampilkan placeholder SVG (tanpa error).
 
 ## Catatan konten
 
-- Kartu **Artefak Produk (Siklus 1–3)** kini membuka **modal dokumen di dalam situs**
-  (deskripsi + embed PDF Google Drive + galeri foto), bukan lagi tautan keluar.
-  Tombol "Buka sumber asli" di modal tetap mengarah ke halaman Google Sites sebagai cadangan.
+- Kartu **Artefak Produk (Siklus 1–3)** dan **Lampiran** kini membuka **modal dokumen
+  di dalam situs** (deskripsi + embed PDF Google Drive + galeri foto) — tidak ada lagi
+  tautan yang mengarah ke halaman Google Sites lama.
 - Tautan kontak sudah diperbaiki (email `ilhammurti163@gmail.com`, WhatsApp `wa.me/62895415845020`,
   Instagram `@krsnailh`, TikTok `@movitt11`) — tautan rusak dari versi Google Sites sudah dibetulkan.
 

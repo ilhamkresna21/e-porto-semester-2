@@ -422,7 +422,16 @@ html[data-theme="dark"] .icon-moon { display: block; }
 .artefak-item span { font-size: .8rem; color: var(--text-soft); }
 
 /* ---------- Link cards (lampiran) ---------- */
-.link-card { display: flex; flex-direction: column; gap: 10px; color: var(--text); }
+.link-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: var(--text);
+  font-family: var(--font);
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+}
 .link-card:hover { text-decoration: none; border-color: var(--primary); }
 .link-card__icon { font-size: 1.9rem; }
 .link-card h3 { font-size: 1.05rem; }
@@ -937,13 +946,6 @@ html[data-theme="dark"] .mini-card:nth-child(6n)   .mini-card__num { background:
   border-radius: 12px;
   border: 1px solid var(--border);
 }
-
-.doc-foot {
-  padding: 0 24px 20px;
-  display: flex;
-  justify-content: flex-end;
-}
-.btn--sm { padding: 9px 16px; font-size: .82rem; border-radius: 11px; }
 
 /* ============================================================
    RESPONSIVE

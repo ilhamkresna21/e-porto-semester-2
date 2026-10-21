@@ -6,9 +6,6 @@
 "use strict";
 
 /* ---------- Data Artefak Produk (per siklus) ---------- */
-const SITES_BASE =
-  "https://sites.google.com/ppg.belajar.id/ilham-kresnamurti-s-kom/artefak-produk";
-
 /*
  * Artefak tiap siklus. Isi driveId (ID file Google Drive) agar dokumen
  * tampil langsung di situs. Cara mendapatkan ID:
@@ -98,6 +95,56 @@ const SIKLUS_DATA = {
   },
 };
 
+/* ---------- Lampiran (modal — tanpa tautan keluar) ---------- */
+const LAMPIRAN_ITEMS = [
+  {
+    icon: "📋",
+    title: "Penilaian Penyusunan Perangkat Pembelajaran",
+    note: "Lampiran",
+    desc:
+      "Dokumen penilaian hasil penyusunan perangkat pembelajaran — skor, catatan pemeriksa, serta umpan balik untuk penyempurnaan RPP dan media pembelajaran.",
+    driveId: "",
+    images: [],
+  },
+  {
+    icon: "🎤",
+    title: "Penilaian Praktik Mengajar",
+    note: "Lampiran",
+    desc:
+      "Hasil penilaian praktik mengajar selama program PPG — rubrik penilaian, skor tiap aspek, serta catatan pembimbing mengenai kinerja di ruang kelas.",
+    driveId: "",
+    images: [],
+  },
+  {
+    icon: "📸",
+    title: "Foto / Video Kegiatan",
+    note: "Lampiran",
+    desc:
+      "Dokumentasi visual kegiatan pembelajaran dan praktik lapangan: suasana kelas, interaksi guru–murid, serta rangkaian kegiatan PPG.",
+    driveId: "",
+    images: [],
+  },
+];
+
+function renderLampiran() {
+  const host = document.getElementById("lampiranGrid");
+  if (!host) return;
+
+  LAMPIRAN_ITEMS.forEach((item) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "card link-card";
+    btn.setAttribute("data-reveal", "");
+    btn.innerHTML =
+      `<span class="link-card__icon">${item.icon}</span>` +
+      `<h3>${item.title}</h3>` +
+      `<p>${item.desc}</p>` +
+      `<span class="link-card__go">${item.driveId ? "Lihat dokumen" : "Lihat detail"} →</span>`;
+    btn.addEventListener("click", () => openDoc(item, null));
+    host.appendChild(btn);
+  });
+}
+
 /* ---------- Render panel tabs artefak ---------- */
 function renderArtefak() {
   const host = document.getElementById("tabsPanels");
@@ -177,15 +224,6 @@ function openDoc(item, siklusKey) {
           )
           .join("")
       : "";
-
-  /* Tautan sumber asli (Google Sites) sebagai cadangan */
-  const source = document.getElementById("docSource");
-  if (siklusKey) {
-    source.href = `${SITES_BASE}/${siklusKey}/${item.slug}`;
-    source.hidden = false;
-  } else {
-    source.hidden = true;
-  }
 
   modal.classList.add("open");
   modal.setAttribute("aria-hidden", "false");
@@ -466,6 +504,7 @@ function initVideoModal() {
 /* ---------- Boot ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   renderArtefak();
+  renderLampiran();
   initTabs();
   initDocModal();
   renderVideos();
