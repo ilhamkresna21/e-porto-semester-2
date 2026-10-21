@@ -37,6 +37,29 @@ const VIDEOS = [
 - Video tampil sebagai kartu thumbnail, diklik → player muncul di modal (tanpa pindah halaman).
 - Selama daftar `VIDEOS` masih kosong, section menampilkan pesan "Belum ada video yang ditautkan".
 
+## Menautkan dokumen artefak (RPP, media, dll.)
+
+Buka `js/script.js`, cari daftar `ARTEFAK_ITEMS`. Setiap item punya:
+
+```js
+{
+  icon: "📄",
+  title: "Rencana Pelaksanaan Pembelajaran (RPP)",
+  slug: "rencana-pelaksanaan-pembelajaran-rpp",
+  note: "Perangkat pembelajaran lengkap",
+  desc: "Deskripsi singkat yang tampil di modal.",
+  driveId: "",                 // ← isi ID file Google Drive
+  images: [],                  // ← opsional: ["assets/img/rpp-1.jpg", ...]
+}
+```
+
+- **Cara mendapatkan ID Drive:** dari link `https://drive.google.com/file/d/1AbC...XYZ/view`,
+  ID-nya adalah bagian `1AbC...XYZ`.
+- Set file Drive ke akses **"Anyone with the link"** agar bisa ditampilkan.
+- Selama `driveId` masih kosong, modal menampilkan placeholder "belum ditautkan"
+  plus deskripsi & tautan sumber asli di Google Sites.
+- `images` untuk galeri foto pendukung (letakkan fotonya di `assets/img/`).
+
 ## Cara menjalankan
 
 Cara termudah: buka `index.html` langsung di browser (double-click).
@@ -69,10 +92,9 @@ Jika file tidak ada, gambar otomatis menampilkan placeholder SVG (tanpa error).
 
 ## Catatan konten
 
-- Kartu **Artefak Produk (Siklus 1–3)** dan **Lampiran** tertaut ke halaman Google Sites asli
-  (dokumen RPP, media, hasil kerja murid, dll. tetap dibuka dari sana). Ubah tautannya di
-  `js/script.js` (variabel `SITES_BASE` dan `ARTEFAK_ITEMS`) atau di `index.html` bila sudah
-  dipindahkan ke Google Drive sendiri.
+- Kartu **Artefak Produk (Siklus 1–3)** kini membuka **modal dokumen di dalam situs**
+  (deskripsi + embed PDF Google Drive + galeri foto), bukan lagi tautan keluar.
+  Tombol "Buka sumber asli" di modal tetap mengarah ke halaman Google Sites sebagai cadangan.
 - Tautan kontak sudah diperbaiki (email `ilhammurti163@gmail.com`, WhatsApp `wa.me/62895415845020`,
   Instagram `@krsnailh`, TikTok `@movitt11`) — tautan rusak dari versi Google Sites sudah dibetulkan.
 

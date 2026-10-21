@@ -9,42 +9,74 @@
 const SITES_BASE =
   "https://sites.google.com/ppg.belajar.id/ilham-kresnamurti-s-kom/artefak-produk";
 
+/*
+ * Artefak tiap siklus. Isi driveId (ID file Google Drive) agar dokumen
+ * tampil langsung di situs. Cara mendapatkan ID:
+ *   https://drive.google.com/file/d/1AbC...XYZ/view  →  ID = 1AbC...XYZ
+ * Set file ke akses "Anyone with the link" agar bisa ditampilkan.
+ * Kosongkan driveId ("") bila dokumen belum siap — tampil placeholder.
+ * images: array path foto hasil upload sendiri, mis. ["assets/img/rpp-1.jpg"]
+ */
 const ARTEFAK_ITEMS = [
   {
     icon: "📄",
     title: "Rencana Pelaksanaan Pembelajaran (RPP)",
     slug: "rencana-pelaksanaan-pembelajaran-rpp",
     note: "Perangkat pembelajaran lengkap",
+    desc:
+      "Rencana Pelaksanaan Pembelajaran berisi identitas sekolah, capaian pembelajaran, tujuan pembelajaran, materi ajar, tahapan kegiatan (pendahuluan, inti, penutup), penilaian, serta refleksi pembelajaran.",
+    driveId: "",
+    images: [],
   },
   {
     icon: "🖥️",
     title: "Media Pembelajaran",
     slug: "media-pembelajaran",
     note: "Media & sumber belajar digital",
+    desc:
+      "Media dan sumber belajar yang digunakan dalam pembelajaran — slide presentasi, video interaktif, aplikasi simulasi, atau LKPD digital yang mendukung pemahaman murid terhadap materi Informatika.",
+    driveId: "",
+    images: [],
   },
   {
     icon: "✍️",
     title: "Contoh Hasil Kerja Murid",
     slug: "contoh-hasil-kerja-murid",
     note: "Bukti capaian belajar peserta didik",
+    desc:
+      "Kumpulan contoh hasil karya peserta didik sebagai bukti capaian pembelajaran, lengkap dengan umpan balik dan rubrik penilaian yang digunakan.",
+    driveId: "",
+    images: [],
   },
   {
     icon: "📸",
     title: "Foto / Video Pembelajaran",
     slug: "fotovideo-pembelajaran",
     note: "Dokumentasi kegiatan di kelas",
+    desc:
+      "Dokumentasi visual pelaksanaan pembelajaran di kelas: suasana kegiatan, interaksi guru–murid, serta aktivitas diskusi dan praktik peserta didik.",
+    driveId: "",
+    images: [],
   },
   {
     icon: "📊",
     title: "Analisis Artefak Produk",
     slug: "analisis-artefak-produk",
     note: "Analisis produk pembelajaran",
+    desc:
+      "Analisis terhadap dokumen dan hasil pembelajaran: kekuatan, kelemahan, serta aspek yang perlu diperbaiki pada siklus berikutnya berdasarkan data dan observasi kelas.",
+    driveId: "",
+    images: [],
   },
   {
     icon: "🔍",
     title: "Refleksi Artefak Produk",
     slug: "refleksi-artefak-produk",
     note: "Refleksi proses pembelajaran",
+    desc:
+      "Refleksi menyeluruh atas perencanaan, pelaksanaan, dan evaluasi pembelajaran pada siklus ini — menjadi dasar perbaikan mutu pembelajaran secara berkelanjutan.",
+    driveId: "",
+    images: [],
   },
 ];
 
@@ -86,20 +118,98 @@ function renderArtefak() {
     grid.className = "artefak-grid";
 
     ARTEFAK_ITEMS.forEach((item) => {
-      const a = document.createElement("a");
-      a.className = "artefak-item";
-      a.href = `${SITES_BASE}/${key}/${item.slug}`;
-      a.target = "_blank";
-      a.rel = "noopener";
-      a.innerHTML =
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "artefak-item";
+      btn.innerHTML =
         `<span class="artefak-item__icon">${item.icon}</span>` +
         `<h4>${item.title}</h4>` +
-        `<span>${item.note} — buka ↗</span>`;
-      grid.appendChild(a);
+        `<span>${item.note}</span>` +
+        `<span class="artefak-item__cta">${item.driveId ? "Lihat dokumen" : "Lihat detail"} →</span>`;
+      btn.addEventListener("click", () => openDoc(item, key));
+      grid.appendChild(btn);
     });
 
     panel.appendChild(grid);
     host.appendChild(panel);
+  });
+}
+
+/* ---------- Modal dokumen artefak ---------- */
+function openDoc(item, siklusKey) {
+  const modal = document.getElementById("docModal");
+  if (!modal) return;
+
+  document.getElementById("docIcon").textContent = item.icon;
+  document.getElementById("docTitle").textContent = item.title;
+  document.getElementById("docSub").textContent =
+    `${item.note} · ${SIKLUS_DATA[siklusKey] ? SIKLUS_DATA[siklusKey].label : ""}`;
+  document.getElementById("docDesc").textContent = item.desc || "";
+
+  /* Area dokumen: embed Google Drive bila driveId diisi */
+  const frame = document.getElementById("docFrame");
+  if (item.driveId) {
+    frame.classList.remove("doc-frame--empty");
+    frame.innerHTML =
+      `<iframe src="https://drive.google.com/file/d/${item.driveId}/preview" ` +
+      `title="${item.title}" allow="autoplay" allowfullscreen></iframe>`;
+  } else {
+    frame.classList.add("doc-frame--empty");
+    frame.innerHTML =
+      '<div class="doc-empty">' +
+      "<span>📂</span>" +
+      `<h4>${item.title} — belum ditautkan</h4>` +
+      "<p>Unggah dokumen ke <strong>Google Drive</strong> dengan akses " +
+      "<em>Anyone with the link</em>, lalu kirimkan linknya. " +
+      "Dokumen akan tampil langsung di tempat ini.</p>" +
+      "</div>";
+  }
+
+  /* Galeri foto (opsional) */
+  const gallery = document.getElementById("docGallery");
+  gallery.innerHTML =
+    (item.images && item.images.length)
+      ? item.images
+          .map(
+            (src) =>
+              `<img src="${src}" alt="${item.title}" loading="lazy" ` +
+              `onerror="this.onerror=null;this.remove();">`
+          )
+          .join("")
+      : "";
+
+  /* Tautan sumber asli (Google Sites) sebagai cadangan */
+  const source = document.getElementById("docSource");
+  if (siklusKey) {
+    source.href = `${SITES_BASE}/${siklusKey}/${item.slug}`;
+    source.hidden = false;
+  } else {
+    source.hidden = true;
+  }
+
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+}
+
+function closeDoc() {
+  const modal = document.getElementById("docModal");
+  if (!modal) return;
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden", "true");
+  document.getElementById("docFrame").innerHTML = "";
+  document.getElementById("docGallery").innerHTML = "";
+  document.body.style.overflow = "";
+}
+
+function initDocModal() {
+  const modal = document.getElementById("docModal");
+  if (!modal) return;
+  modal.querySelectorAll("[data-close-doc]").forEach((el) =>
+    el.addEventListener("click", closeDoc)
+  );
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeDoc();
   });
 }
 
@@ -357,6 +467,7 @@ function initVideoModal() {
 document.addEventListener("DOMContentLoaded", () => {
   renderArtefak();
   initTabs();
+  initDocModal();
   renderVideos();
   initVideoModal();
   initNavbar();

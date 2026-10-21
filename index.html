@@ -442,6 +442,29 @@
       </div>
     </div>
 
+    <!-- Modal dokumen artefak -->
+    <div class="modal modal--doc" id="docModal" aria-hidden="true">
+      <div class="modal__backdrop" data-close-doc></div>
+      <div class="modal__dialog" role="dialog" aria-modal="true" aria-label="Detail dokumen artefak">
+        <button class="modal__close" data-close-doc aria-label="Tutup dokumen">✕</button>
+        <div class="doc-head">
+          <span class="doc-head__icon" id="docIcon">📄</span>
+          <div>
+            <h3 id="docTitle"></h3>
+            <p id="docSub"></p>
+          </div>
+        </div>
+        <div class="doc-body">
+          <p class="doc-desc" id="docDesc"></p>
+          <div class="doc-frame" id="docFrame"></div>
+          <div class="doc-gallery" id="docGallery"></div>
+        </div>
+        <div class="doc-foot">
+          <a id="docSource" href="#" target="_blank" rel="noopener" class="btn btn--ghost btn--sm">Buka sumber asli ↗</a>
+        </div>
+      </div>
+    </div>
+
     <!-- ============ LAMPIRAN ============ -->
     <section class="section section--alt acc-lampiran" id="lampiran">
       <div class="container">
