@@ -93,6 +93,11 @@ const SIKLUS_DATA = {
     desc:
       "Siklus 3 menjadi penutup dari rangkaian penyusunan artefak produk pembelajaran. Dokumen pada siklus ini menampilkan hasil perbaikan dari siklus sebelumnya, mulai dari RPP, media pembelajaran, hasil kerja murid, dokumentasi kegiatan, analisis, hingga refleksi akhir — sebagai bukti peningkatan mutu pembelajaran secara berkelanjutan.",
   },
+  "siklus-4": {
+    label: "Siklus 4",
+    desc:
+      "Siklus 4 merupakan kelanjutan dari siklus-siklus sebelumnya sebagai wujud perbaikan dan pemantapan mutu pembelajaran. Artefak pada siklus ini memuat RPP hasil peninjauan, media pembelajaran yang telah disempurnakan, contoh hasil kerja murid terbaru, dokumentasi kegiatan, analisis produk, serta refleksi akhir — menegaskan komitmen saya dalam menerapkan pembelajaran yang berpusat pada murid secara berkesinambungan.",
+  },
 };
 
 /* ---------- Lampiran (modal — tanpa tautan keluar) ---------- */

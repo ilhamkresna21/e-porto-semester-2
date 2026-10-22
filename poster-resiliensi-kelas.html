@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Poster Resiliensi — Menumbuhkan Resiliensi di Kelas Saya</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0f172a;
+    --muted:#526079;
+    --teal:#0d9488;   --teal-dark:#0b6f66;  --teal-soft:#d6f5ef;
+    --amber:#d97706;  --amber-soft:#fdf0d7;
+    --green:#15803d;  --green-soft:#ddf3e3;
+    --blue:#1d4ed8;   --blue-soft:#e3ecfd;
+    --paper:#fbfdf9;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:#dfe6ee;font-family:'Nunito',sans-serif;color:var(--ink);
+       display:flex;justify-content:center;padding:28px;}
+
+  .poster{width:1600px;min-height:1130px;background:var(--paper);
+     border-radius:24px;position:relative;overflow:hidden;
+     box-shadow:0 20px 55px rgba(15,23,42,.25);
+     background-image:radial-gradient(rgba(13,148,136,.10) 1.6px, transparent 1.6px);
+     background-size:26px 26px;
+     display:flex;flex-direction:column;padding:34px 44px 22px;}
+
+  /* ================= HEADER ================= */
+  .header{text-align:center;flex:0 0 auto;}
+  .kicker{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;
+     font:800 12.5px/1 'Nunito';letter-spacing:2.5px;text-transform:uppercase;
+     padding:9px 20px;border-radius:999px;margin-bottom:10px;}
+  .kicker .dot{width:8px;height:8px;border-radius:50%;background:#34d399;}
+  h1{font:800 44px/1.12 'Baloo 2',cursive;color:var(--ink);}
+  h1 .hl{color:var(--teal);}
+  .subtitle{font:600 15.5px/1.5 'Nunito';color:var(--muted);max-width:900px;margin:4px auto 0;}
+
+  /* ================= ROWS ================= */
+  .row{display:flex;gap:26px;flex:1 1 auto;margin-top:30px;}
+  .row.top{flex:0 0 auto;}
+  .card{flex:1;background:#fff;border-radius:22px;padding:22px 26px;
+     box-shadow:0 8px 24px rgba(15,23,42,.08);position:relative;display:flex;flex-direction:column;}
+  .card::before{content:'';position:absolute;top:0;left:26px;right:26px;height:5px;border-radius:0 0 6px 6px;}
+  .c1::before{background:var(--blue);}   .c2::before{background:var(--green);}
+  .c3::before{background:var(--amber);}  .c4::before{background:var(--teal);}
+
+  .card-head{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+  .num{width:38px;height:38px;border-radius:12px;color:#fff;display:flex;align-items:center;
+     justify-content:center;font:800 19px 'Baloo 2';flex:0 0 auto;box-shadow:0 4px 10px rgba(15,23,42,.18);}
+  .c1 .num{background:var(--blue);} .c2 .num{background:var(--green);}
+  .c3 .num{background:var(--amber);}.c4 .num{background:var(--teal);}
+  .card-head h3{font:800 23px/1.1 'Baloo 2';}
+  .card-head .sub{font:600 12.5px 'Nunito';color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+
+  .card ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+  .card li{font:600 15px/1.5 'Nunito';color:#243247;padding-left:26px;position:relative;}
+  .card li::before{content:'';position:absolute;left:4px;top:8px;width:10px;height:10px;border-radius:4px;}
+  .c1 li::before{background:var(--blue);}   .c2 li::before{background:var(--green);}
+  .c3 li::before{background:var(--amber);}  .c4 li::before{background:var(--teal);}
+  .card li b{font-weight:800;}
+  .card li .soft{background:var(--teal-soft);border-radius:6px;padding:0 5px;font-weight:800;color:var(--teal-dark);}
+  .c3 li .hl-a{background:var(--amber-soft);border-radius:6px;padding:0 5px;font-weight:800;color:var(--amber);}
+  .c1 li .hl-b{background:var(--blue-soft);border-radius:6px;padding:0 5px;font-weight:800;color:var(--blue);}
+
+  .pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+  .pill{font:800 13.5px 'Nunito';padding:7px 14px;border-radius:999px;color:#fff;
+     box-shadow:0 3px 8px rgba(15,23,42,.12);}
+  .c2 .pill:nth-child(4n+1){background:var(--green);}
+  .c2 .pill:nth-child(4n+2){background:var(--teal);}
+  .c2 .pill:nth-child(4n+3){background:#65a30d;}
+  .c2 .pill:nth-child(4n){background:#0e7490;}
+
+  /* ================= CENTER BAND ================= */
+  .band{flex:0 0 auto;margin-top:30px;position:relative;background:linear-gradient(100deg,#0b6f66,#0d9488 55%,#0e7490);
+     border-radius:20px;color:#fff;padding:20px 36px;display:flex;align-items:center;gap:26px;
+     box-shadow:0 12px 30px rgba(13,148,136,.35);}
+  .band .em{font-size:46px;flex:0 0 auto;}
+  .band h2{font:800 30px/1 'Baloo 2';letter-spacing:1px;flex:0 0 auto;}
+  .band .def{font:700 15.5px/1.55 'Nunito';border-left:3px solid rgba(255,255,255,.4);padding-left:20px;}
+  .band .quote{margin-left:auto;flex:0 0 auto;font:800 13.5px/1.5 'Nunito';
+     background:rgba(255,255,255,.14);border:1.5px dashed rgba(255,255,255,.5);
+     border-radius:14px;padding:12px 18px;max-width:330px;text-align:center;}
+  .conn{position:absolute;width:4px;height:26px;background:var(--teal);border-radius:2px;}
+  .conn.top{top:-28px;} .conn.bot{bottom:-28px;}
+  .conn.l1{left:26%;} .conn.r1{right:26%;}
+  .conn .tip{position:absolute;left:-4px;width:12px;height:12px;border-radius:50%;background:var(--teal);}
+  .conn.top .tip{top:-12px;} .conn.bot .tip{bottom:-12px;}
+
+  /* ================= FOOTER ================= */
+  .footer{flex:0 0 auto;margin-top:34px;text-align:center;font:700 13.5px 'Nunito';
+     color:var(--muted);display:flex;align-items:center;gap:14px;}
+  .footer .line{flex:1;height:2px;background:linear-gradient(90deg,transparent,#c3d2c9,transparent);}
+  .footer b{color:var(--teal-dark);}
+  .author{display:inline-flex;align-items:center;gap:10px;background:#fff;border-radius:999px;
+     padding:8px 18px;box-shadow:0 4px 12px rgba(15,23,42,.10);font:700 14px 'Nunito';}
+  .author .av{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--teal),#0e7490);
+     color:#fff;display:flex;align-items:center;justify-content:center;font:800 14px 'Baloo 2';}
+  .author .nim{color:var(--muted);font-weight:700;}
+
+  @media print{
+     body{padding:0;background:#fff;}
+     .poster{border-radius:0;box-shadow:none;width:100%;min-height:auto;}
+     @page{size:1600px 1130px;margin:0;}
+  }
+</style>
+</head>
+<body>
+<div class="poster">
+
+  <!-- ================= HEADER ================= -->
+  <div class="header">
+    <span class="kicker"><span class="dot"></span>PPG &bull; Materi Pendidikan Resiliensi</span>
+    <h1>Menumbuhkan <span class="hl">Resiliensi</span> di Kelas Saya 🌱</h1>
+    <div class="subtitle">Peta konsep &amp; rencana desain pendidikan resiliensi pada level kelas — ditumbuhkan lewat <b>pengalaman, teladan, dan pembiasaan</b>, bukan sekadar teori</div>
+  </div>
+
+  <!-- ================= ROW ATAS ================= -->
+  <div class="row top">
+
+    <!-- 1. Mengapa penting -->
+    <div class="card c1">
+      <div class="card-head">
+        <span class="num">1</span>
+        <div>
+          <h3>Mengapa Penting?</h3>
+          <span class="sub">Latar &amp; Urgensi</span>
+        </div>
+      </div>
+      <ul>
+        <li>Tekanan yang dihadapi siswa masa kini: beban akademik, tuntutan pergaulan, perundungan, dan tantangan era digital</li>
+        <li><span class="hl-b">Pencegahan &gt; penanganan</span> — lebih efektif &amp; murah daripada mengatasi masalah yang sudah terjadi (gangguan jiwa, putus sekolah)</li>
+        <li>Guru wajib menanamkan resiliensi karena <b>sekolah adalah garda terdepan</b> layanan kesejahteraan siswa</li>
+      </ul>
+    </div>
+
+    <!-- 2. Komponen -->
+    <div class="card c2">
+      <div class="card-head">
+        <span class="num">2</span>
+        <div>
+          <h3>Komponen Resiliensi</h3>
+          <span class="sub">Sumber daya internal (internal assets)</span>
+        </div>
+      </div>
+      <p style="font:600 14.5px/1.5 'Nunito';color:var(--muted);">Resiliensi dibangun dari kekuatan yang perlu dilatih guru di kelas:</p>
+      <div class="pill-row">
+        <span class="pill">Coping</span>
+        <span class="pill">Grit</span>
+        <span class="pill">Self-efficacy</span>
+        <span class="pill">Optimisme</span>
+        <span class="pill">Regulasi Emosi</span>
+        <span class="pill">Problem Solving</span>
+        <span class="pill">Academic Buoyancy</span>
+        <span class="pill">Hardiness</span>
+        <span class="pill">Well-being</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PUSAT ================= -->
+  <div class="band">
+    <div class="conn top l1"><span class="tip"></span></div>
+    <div class="conn top r1"><span class="tip"></span></div>
+    <div class="conn bot l1"><span class="tip"></span></div>
+    <div class="conn bot r1"><span class="tip"></span></div>
+    <span class="em">🧗</span>
+    <h2>RESILIENSI</h2>
+    <p class="def">Kemampuan <b>bangkit kembali</b> &amp; beradaptasi positif ketika menghadapi kesulitan, kegagalan, maupun tekanan — bukan sifat bawaan, melainkan <b>keterampilan yang bisa dilatih</b></p>
+    <p class="quote">“Resiliensi adalah vitamin harian,<br>bukan obat darurat” 💊</p>
+  </div>
+
+  <!-- ================= ROW BAWAH ================= -->
+  <div class="row">
+
+    <!-- 3. Rencana level kelas -->
+    <div class="card c3" style="flex:1.45;">
+      <div class="card-head">
+        <span class="num">3</span>
+        <div>
+          <h3>Rencana Desain di Level Kelas</h3>
+          <span class="sub">Inti program &bull; untuk semua siswa, bukan hanya yang bermasalah</span>
+        </div>
+      </div>
+      <ul>
+        <li><b>Praktik harian:</b> <span class="hl-a">growth mindset</span> — kesalahan = bagian proses belajar; apresiasi <i>usaha</i>, bukan hanya hasil; tanpa label &amp; ejekan</li>
+        <li><b>Kegiatan mingguan:</b> jurnal refleksi “kegagalan yang mengajariku”, proyek menantang berkelompok, kisah tokoh yang bangkit dari kegagalan</li>
+        <li><b>Iklim kelas:</b> kesepakatan kelas bersama siswa • sistem <i>teman sebaya pendukung</i> (peer support)</li>
+        <li><b>Peran guru:</b> teladan ketenangan &amp; pantang menyerah, membangun hubungan yang aman dan suportif dengan tiap siswa, berbasis <b>kekuatan siswa</b> (strength-based)</li>
+      </ul>
+    </div>
+
+    <!-- 4. Kolaborasi -->
+    <div class="card c4">
+      <div class="card-head">
+        <span class="num">4</span>
+        <div>
+          <h3>Kolaborasi</h3>
+          <span class="sub">Sekolah &bull; keluarga &bull; lingkungan</span>
+        </div>
+      </div>
+      <ul>
+        <li><b>Orang tua:</b> komunikasi rutin &amp; pola asuh yang menenangkan, bukan menghakimi</li>
+        <li><b>Guru BK:</b> pendampingan khusus bagi siswa yang membutuhkan (kasus berat → rujukan profesional)</li>
+        <li><b>Sekolah &amp; lingkungan:</b> budaya sekolah positif yang menopang kesejahteraan seluruh siswa</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <div class="footer">
+    <span class="author"><span class="av">IK</span> <b>Ilham Kresnamurti</b> <span class="nim">• NIM A971260007</span></span>
+    <span class="line"></span>
+    <span><b>Prinsip guru:</b> bukan hanya pengajar materi, tetapi <b>teladan bangkit kembali</b> — resiliensi ditumbuhkan lewat pengalaman, teladan, dan pembiasaan.</span>
+    <span class="line"></span>
+  </div>
+</div>
+</body>
+</html>
