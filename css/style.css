@@ -6,13 +6,13 @@
 :root {
   --font: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
 
-  --bg: #ffffff;
-  --bg-alt: #f7f9fd;
+  --bg: #fdfcf9;
+  --bg-alt: #faf7f0;
   --surface: #ffffff;
-  --surface-2: #f8fafc;
-  --text: #0f172a;
-  --text-soft: #4b5670;
-  --border: #e8edf6;
+  --surface-2: #faf8f3;
+  --text: #231f1c;
+  --text-soft: #5d564e;
+  --border: #efe9df;
 
   --primary: #4f46e5;
   --primary-600: #4338ca;
@@ -21,8 +21,8 @@
 
   --radius: 18px;
   --radius-sm: 12px;
-  --shadow: 0 4px 18px rgba(15, 23, 42, .05);
-  --shadow-lg: 0 16px 44px rgba(15, 23, 42, .10);
+  --shadow: 0 4px 18px rgba(53, 42, 30, .05);
+  --shadow-lg: 0 16px 44px rgba(53, 42, 30, .10);
   --container: 1120px;
 }
 
@@ -705,15 +705,15 @@ html[data-theme="dark"] .icon-moon { display: block; }
   --c-blue: #2563eb;
 }
 
-/* Palet aksen tiap section (terang) + latar pastel lembut */
-.acc-profil    { --primary: #4f46e5; --accent: #0ea5e9; background: linear-gradient(180deg, #ffffff 0%, #f7f9ff 100%); }
-.acc-daerah    { --primary: #059669; --accent: #14b8a6; background: linear-gradient(180deg, #f6fcf9 0%, #edf9f3 100%); }
-.acc-inspirasi { --primary: #d97706; --accent: #f97316; background: linear-gradient(180deg, #fffaf3 0%, #fff5e9 100%); }
-.acc-artefak   { --primary: #0284c7; --accent: #6366f1; background: linear-gradient(180deg, #f6fbff 0%, #eef7ff 100%); }
-.acc-video     { --primary: #e11d48; --accent: #f97316; background: linear-gradient(180deg, #fff8f8 0%, #fff1f4 100%); }
-.acc-lampiran  { --primary: #7c3aed; --accent: #db2777; background: linear-gradient(180deg, #fbf9ff 0%, #f5f1ff 100%); }
-.acc-model     { --primary: #0d9488; --accent: #84cc16; background: linear-gradient(180deg, #f5fdfb 0%, #ecfbf8 100%); }
-.acc-refleksi  { --primary: #2563eb; --accent: #7c3aed; background: linear-gradient(180deg, #f8faff 0%, #f1f5ff 100%); }
+/* Palet aksen tiap section (terang) + dasar krem hangat yang sama untuk semua */
+.acc-profil    { --primary: #4f46e5; --accent: #0ea5e9; background: linear-gradient(180deg, #fdfbf6 0%, #faf5ec 100%); }
+.acc-daerah    { --primary: #059669; --accent: #14b8a6; background: linear-gradient(180deg, #fdfbf6 0%, #faf5ec 100%); }
+.acc-inspirasi { --primary: #d97706; --accent: #f97316; background: linear-gradient(180deg, #fdfbf6 0%, #faf5ec 100%); }
+.acc-artefak   { --primary: #0284c7; --accent: #6366f1; background: linear-gradient(180deg, #fdfbf6 0%, #faf5ec 100%); }
+.acc-video     { --primary: #e11d48; --accent: #f97316; background: linear-gradient(180deg, #fdfbf6 0%, #faf5ec 100%); }
+.acc-lampiran  { --primary: #7c3aed; --accent: #db2777; background: linear-gradient(180deg, #fdfbf6 0%, #faf5ec 100%); }
+.acc-model     { --primary: #0d9488; --accent: #84cc16; background: linear-gradient(180deg, #fdfbf6 0%, #faf5ec 100%); }
+.acc-refleksi  { --primary: #2563eb; --accent: #7c3aed; background: linear-gradient(180deg, #fdfbf6 0%, #faf5ec 100%); }
 
 /* Palet aksen tiap section (gelap — warna lebih terang + latar bertint halus) */
 html[data-theme="dark"] .acc-profil    { --primary: #818cf8; --accent: #38bdf8; background: linear-gradient(180deg, #0d1222 0%, #0f1330 100%); }
@@ -725,9 +725,9 @@ html[data-theme="dark"] .acc-lampiran  { --primary: #a78bfa; --accent: #f472b6; 
 html[data-theme="dark"] .acc-model     { --primary: #2dd4bf; --accent: #a3e635; background: linear-gradient(180deg, #0b1a1c 0%, #0c1c19 100%); }
 html[data-theme="dark"] .acc-refleksi  { --primary: #60a5fa; --accent: #a78bfa; background: linear-gradient(180deg, #0d1224 0%, #10132a 100%); }
 
-/* Hero: latar putih cerah khusus mode terang */
+/* Hero: putih murni → krem lembut (khusus mode terang) */
 html:not([data-theme="dark"]) .hero {
-  background: linear-gradient(180deg, #ffffff 0%, #f3f6ff 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #fbf8f2 100%);
 }
 
 /* ---------- Blob hero tambahan (warna hangat) ---------- */
