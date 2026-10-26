@@ -61,6 +61,10 @@ Buka `js/script.js`, cari daftar `ARTEFAK_ITEMS`. Setiap item punya:
   situs sendiri — tanpa tautan ke Google Sites lama.**
 - `images` untuk galeri foto pendukung (letakkan fotonya di `assets/img/`).
 
+Format item yang sama dipakai oleh **`LAMPIRAN_ITEMS`** (section Lampiran) dan
+**`LK3_ITEMS`** (section Lembar Kerja 3 — Non-Mengajar) di `js/script.js` —
+isi `driveId` dengan cara yang sama agar dokumennya tampil langsung di situs.
+
 ## Cara menjalankan
 
 Cara termudah: buka `index.html` langsung di browser (double-click).

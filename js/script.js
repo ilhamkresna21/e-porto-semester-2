@@ -150,6 +150,47 @@ function renderLampiran() {
   });
 }
 
+/* ---------- Lembar Kerja 3 — Non-Mengajar (modal — tanpa tautan keluar) ---------- */
+const LK3_ITEMS = [
+  {
+    icon: "📄",
+    title: "Laporan Lembar Kerja 3 (Non-Mengajar)",
+    note: "Dokumen utama",
+    desc:
+      "Laporan lengkap kegiatan non-mengajar: identitas peserta didik, latar belakang, tujuan, tahapan pelaksanaan kegiatan non-mengajar, hasil yang dicapai, hingga evaluasi dan tindak lanjut.",
+    driveId: "",
+    images: [],
+  },
+  {
+    icon: "📎",
+    title: "Dokumen Pendukung",
+    note: "Lampiran laporan",
+    desc:
+      "Dokumen pendukung laporan kegiatan non-mengajar — lembar observasi, jadwal kegiatan, hasil karya, atau berkas pendukung lainnya.",
+    driveId: "",
+    images: [],
+  },
+];
+
+function renderLk3() {
+  const host = document.getElementById("lk3Grid");
+  if (!host) return;
+
+  LK3_ITEMS.forEach((item) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "card link-card";
+    btn.setAttribute("data-reveal", "");
+    btn.innerHTML =
+      `<span class="link-card__icon">${item.icon}</span>` +
+      `<h3>${item.title}</h3>` +
+      `<p>${item.desc}</p>` +
+      `<span class="link-card__go">${item.driveId ? "Lihat dokumen" : "Lihat detail"} →</span>`;
+    btn.addEventListener("click", () => openDoc(item, null));
+    host.appendChild(btn);
+  });
+}
+
 /* ---------- Render panel tabs artefak ---------- */
 function renderArtefak() {
   const host = document.getElementById("tabsPanels");
@@ -194,8 +235,10 @@ function openDoc(item, siklusKey) {
 
   document.getElementById("docIcon").textContent = item.icon;
   document.getElementById("docTitle").textContent = item.title;
+  const siklusLabel =
+    siklusKey && SIKLUS_DATA[siklusKey] ? SIKLUS_DATA[siklusKey].label : "";
   document.getElementById("docSub").textContent =
-    `${item.note} · ${SIKLUS_DATA[siklusKey] ? SIKLUS_DATA[siklusKey].label : ""}`;
+    siklusLabel ? `${item.note} · ${siklusLabel}` : item.note;
   document.getElementById("docDesc").textContent = item.desc || "";
 
   /* Area dokumen: embed Google Drive bila driveId diisi */
@@ -510,6 +553,7 @@ function initVideoModal() {
 document.addEventListener("DOMContentLoaded", () => {
   renderArtefak();
   renderLampiran();
+  renderLk3();
   initTabs();
   initDocModal();
   renderVideos();
