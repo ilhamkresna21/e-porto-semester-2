@@ -296,7 +296,7 @@ html[data-theme="dark"] .icon-moon { display: block; }
   overflow: hidden;
   border: 5px solid var(--surface);
   box-shadow: var(--shadow-lg);
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 9 / 16;
 }
 .photo-frame img { width: 100%; height: 100%; object-fit: cover; }
 
