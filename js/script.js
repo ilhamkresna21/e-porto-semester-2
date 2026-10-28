@@ -5,6 +5,36 @@
 
 "use strict";
 
+/* ---------- Konten dari CMS (Sanity) ---------- */
+let SITE_IMAGES = {};
+
+function cdnImage(url, width = 1200) {
+  if (!url) return "";
+  if (!url.includes("cdn.sanity.io")) return url;
+  return url + (url.includes("?") ? "&" : "?") + `w=${width}&auto=format&fit=crop`;
+}
+
+function imageSrc(image, width = 1200) {
+  if (!image) return "";
+  if (typeof image === "string") return cdnImage(image, width);
+  return cdnImage(image.url || "", width);
+}
+
+function imageAlt(image, fallback = "") {
+  if (!image || typeof image === "string") return fallback;
+  return image.alt || fallback;
+}
+
+function applySiteImages() {
+  document.querySelectorAll("[data-cms-image]").forEach((img) => {
+    const key = img.getAttribute("data-cms-image");
+    const image = SITE_IMAGES[key];
+    if (!image || !image.url) return;
+    img.src = cdnImage(image.url, 1400);
+    if (image.alt) img.alt = image.alt;
+  });
+}
+
 /* ---------- Data Artefak Produk (per siklus) ---------- */
 /*
  * Artefak tiap siklus. Isi driveId (ID file Google Drive) agar dokumen
@@ -14,7 +44,7 @@
  * Kosongkan driveId ("") bila dokumen belum siap — tampil placeholder.
  * images: array path foto hasil upload sendiri, mis. ["assets/img/rpp-1.jpg"]
  */
-const ARTEFAK_ITEMS = [
+let ARTEFAK_ITEMS = [
   {
     icon: "📄",
     title: "Rencana Pelaksanaan Pembelajaran (RPP)",
@@ -77,7 +107,7 @@ const ARTEFAK_ITEMS = [
   },
 ];
 
-const SIKLUS_DATA = {
+let SIKLUS_DATA = {
   "siklus-1": {
     label: "Siklus 1",
     desc:
@@ -101,7 +131,7 @@ const SIKLUS_DATA = {
 };
 
 /* ---------- Lampiran (modal — tanpa tautan keluar) ---------- */
-const LAMPIRAN_ITEMS = [
+let LAMPIRAN_ITEMS = [
   {
     icon: "📋",
     title: "Penilaian Penyusunan Perangkat Pembelajaran",
@@ -134,6 +164,7 @@ const LAMPIRAN_ITEMS = [
 function renderLampiran() {
   const host = document.getElementById("lampiranGrid");
   if (!host) return;
+  host.innerHTML = "";
 
   LAMPIRAN_ITEMS.forEach((item) => {
     const btn = document.createElement("button");
@@ -141,17 +172,17 @@ function renderLampiran() {
     btn.className = "card link-card";
     btn.setAttribute("data-reveal", "");
     btn.innerHTML =
-      `<span class="link-card__icon">${item.icon}</span>` +
+      `<span class="link-card__icon">${item.icon || "📄"}</span>` +
       `<h3>${item.title}</h3>` +
-      `<p>${item.desc}</p>` +
-      `<span class="link-card__go">${item.driveId ? "Lihat dokumen" : "Lihat detail"} →</span>`;
+      `<p>${item.desc || item.description || ""}</p>` +
+      `<span class="link-card__go">${item.driveId || item.driveUrl ? "Lihat dokumen" : "Lihat detail"} →</span>`;
     btn.addEventListener("click", () => openDoc(item, null));
     host.appendChild(btn);
   });
 }
 
 /* ---------- Lembar Kerja 3 — Non-Mengajar (modal — tanpa tautan keluar) ---------- */
-const LK3_ITEMS = [
+let LK3_ITEMS = [
   {
     icon: "📄",
     title: "Laporan Lembar Kerja 3 (Non-Mengajar)",
@@ -175,6 +206,7 @@ const LK3_ITEMS = [
 function renderLk3() {
   const host = document.getElementById("lk3Grid");
   if (!host) return;
+  host.innerHTML = "";
 
   LK3_ITEMS.forEach((item) => {
     const btn = document.createElement("button");
@@ -182,10 +214,10 @@ function renderLk3() {
     btn.className = "card link-card";
     btn.setAttribute("data-reveal", "");
     btn.innerHTML =
-      `<span class="link-card__icon">${item.icon}</span>` +
+      `<span class="link-card__icon">${item.icon || "📄"}</span>` +
       `<h3>${item.title}</h3>` +
-      `<p>${item.desc}</p>` +
-      `<span class="link-card__go">${item.driveId ? "Lihat dokumen" : "Lihat detail"} →</span>`;
+      `<p>${item.desc || item.description || ""}</p>` +
+      `<span class="link-card__go">${item.driveId || item.driveUrl ? "Lihat dokumen" : "Lihat detail"} →</span>`;
     btn.addEventListener("click", () => openDoc(item, null));
     host.appendChild(btn);
   });
@@ -194,9 +226,26 @@ function renderLk3() {
 /* ---------- Render panel tabs artefak ---------- */
 function renderArtefak() {
   const host = document.getElementById("tabsPanels");
+  const nav = document.querySelector(".tabs__nav");
   if (!host) return;
+  host.innerHTML = "";
+  if (nav) nav.innerHTML = "";
 
-  Object.entries(SIKLUS_DATA).forEach(([key, data], index) => {
+  const cycles = Object.entries(SIKLUS_DATA);
+  if (!cycles.length) return;
+
+  cycles.forEach(([key, data], index) => {
+    if (nav) {
+      const btn = document.createElement("button");
+      btn.className = "tabs__btn" + (index === 0 ? " active" : "");
+      btn.type = "button";
+      btn.setAttribute("role", "tab");
+      btn.setAttribute("aria-selected", String(index === 0));
+      btn.dataset.tab = key;
+      btn.textContent = data.label || `Siklus ${index + 1}`;
+      nav.appendChild(btn);
+    }
+
     const panel = document.createElement("div");
     panel.className = "tabs__panel" + (index === 0 ? " active" : "");
     panel.id = key;
@@ -204,21 +253,23 @@ function renderArtefak() {
 
     const desc = document.createElement("p");
     desc.className = "tabs__desc";
-    desc.textContent = data.desc;
+    desc.textContent = data.desc || "";
     panel.appendChild(desc);
 
     const grid = document.createElement("div");
     grid.className = "artefak-grid";
 
-    ARTEFAK_ITEMS.forEach((item) => {
+    const items =
+      data.artifacts && data.artifacts.length ? data.artifacts : ARTEFAK_ITEMS;
+    items.forEach((item) => {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "artefak-item";
       btn.innerHTML =
-        `<span class="artefak-item__icon">${item.icon}</span>` +
+        `<span class="artefak-item__icon">${item.icon || "📄"}</span>` +
         `<h4>${item.title}</h4>` +
-        `<span>${item.note}</span>` +
-        `<span class="artefak-item__cta">${item.driveId ? "Lihat dokumen" : "Lihat detail"} →</span>`;
+        `<span>${item.note || ""}</span>` +
+        `<span class="artefak-item__cta">${item.driveId || item.driveUrl ? "Lihat dokumen" : "Lihat detail"} →</span>`;
       btn.addEventListener("click", () => openDoc(item, key));
       grid.appendChild(btn);
     });
@@ -233,45 +284,81 @@ function openDoc(item, siklusKey) {
   const modal = document.getElementById("docModal");
   if (!modal) return;
 
-  document.getElementById("docIcon").textContent = item.icon;
-  document.getElementById("docTitle").textContent = item.title;
+  const title = item.title || "Dokumen";
+  document.getElementById("docIcon").textContent = item.icon || "📄";
+  document.getElementById("docTitle").textContent = title;
   const siklusLabel =
     siklusKey && SIKLUS_DATA[siklusKey] ? SIKLUS_DATA[siklusKey].label : "";
-  document.getElementById("docSub").textContent =
-    siklusLabel ? `${item.note} · ${siklusLabel}` : item.note;
-  document.getElementById("docDesc").textContent = item.desc || "";
+  document.getElementById("docSub").textContent = siklusLabel
+    ? `${item.note || ""} · ${siklusLabel}`
+    : item.note || "";
+  document.getElementById("docDesc").textContent =
+    item.desc || item.description || "";
 
-  /* Area dokumen: embed Google Drive bila driveId diisi */
+  const driveUrl =
+    item.driveUrl ||
+    (item.driveId
+      ? `https://drive.google.com/file/d/${item.driveId}/view`
+      : "");
+  const driveId =
+    item.driveId ||
+    (window.EPORTO_CONTENT && window.EPORTO_CONTENT.driveIdFromUrl
+      ? window.EPORTO_CONTENT.driveIdFromUrl(driveUrl)
+      : "");
+
+  /* Area dokumen: embed Google Drive bila ID ditemukan */
   const frame = document.getElementById("docFrame");
-  if (item.driveId) {
+  const actions = document.getElementById("docActions");
+  if (actions) actions.innerHTML = "";
+
+  if (driveId) {
     frame.classList.remove("doc-frame--empty");
     frame.innerHTML =
-      `<iframe src="https://drive.google.com/file/d/${item.driveId}/preview" ` +
-      `title="${item.title}" allow="autoplay" allowfullscreen></iframe>`;
+      `<iframe src="https://drive.google.com/file/d/${driveId}/preview" ` +
+      `title="${title}" allow="autoplay" allowfullscreen></iframe>`;
+    if (actions && driveUrl) {
+      actions.innerHTML = `<a class="btn btn--ghost btn--small" href="${driveUrl}" target="_blank" rel="noopener">Buka di Google Drive ↗</a>`;
+    }
+  } else if (driveUrl) {
+    frame.classList.add("doc-frame--empty");
+    frame.innerHTML =
+      '<div class="doc-empty">' +
+      "<span>📂</span>" +
+      `<h4>${title}</h4>` +
+      "<p>Dokumen ini tersimpan di Google Drive. Klik tombol di bawah untuk membukanya.</p>" +
+      "</div>";
+    if (actions) {
+      actions.innerHTML = `<a class="btn btn--primary btn--small" href="${driveUrl}" target="_blank" rel="noopener">Buka Dokumen di Google Drive ↗</a>`;
+    }
   } else {
     frame.classList.add("doc-frame--empty");
     frame.innerHTML =
       '<div class="doc-empty">' +
       "<span>📂</span>" +
-      `<h4>${item.title} — belum ditautkan</h4>` +
-      "<p>Unggah dokumen ke <strong>Google Drive</strong> dengan akses " +
-      "<em>Anyone with the link</em>, lalu kirimkan linknya. " +
-      "Dokumen akan tampil langsung di tempat ini.</p>" +
+      `<h4>${title} — belum ditautkan</h4>` +
+      "<p>Dokumen belum diunggah. Silakan tambahkan link Google Drive melalui admin.</p>" +
       "</div>";
   }
 
   /* Galeri foto (opsional) */
   const gallery = document.getElementById("docGallery");
-  gallery.innerHTML =
-    (item.images && item.images.length)
-      ? item.images
-          .map(
-            (src) =>
-              `<img src="${src}" alt="${item.title}" loading="lazy" ` +
-              `onerror="this.onerror=null;this.remove();">`
-          )
-          .join("")
-      : "";
+  const images = item.images || [];
+  gallery.innerHTML = images.length
+    ? images
+        .map((image) => {
+          const src = imageSrc(image, 1200);
+          const alt = imageAlt(image, title);
+          const caption =
+            typeof image === "object" && image.caption
+              ? `<figcaption>${image.caption}</figcaption>`
+              : "";
+          return (
+            `<figure><img src="${src}" alt="${alt}" loading="lazy" ` +
+            `onerror="this.onerror=null;this.remove();">${caption}</figure>`
+          );
+        })
+        .join("")
+    : "";
 
   modal.classList.add("open");
   modal.setAttribute("aria-hidden", "false");
@@ -285,6 +372,8 @@ function closeDoc() {
   modal.setAttribute("aria-hidden", "true");
   document.getElementById("docFrame").innerHTML = "";
   document.getElementById("docGallery").innerHTML = "";
+  const actions = document.getElementById("docActions");
+  if (actions) actions.innerHTML = "";
   document.body.style.overflow = "";
 }
 
@@ -438,7 +527,7 @@ function initYear() {
      { title: "Video dari Drive", desc: "...",
        url: "https://drive.google.com/file/d/FILE_ID/view" }
    ============================================================ */
-const VIDEOS = [
+let VIDEOS = [
   // { title: "", desc: "", url: "" },
 ];
 
@@ -474,7 +563,7 @@ function getVideoMeta(video) {
     return {
       type: "Drive",
       embed: `https://drive.google.com/file/d/${drive}/preview`,
-      thumb: "assets/img/placeholder-teaching.svg",
+      thumb: `https://drive.google.com/thumbnail?id=${drive}&sz=w1200`,
     };
   }
   return null;
@@ -485,6 +574,7 @@ function renderVideos() {
   const grid = document.getElementById("videoGrid");
   const empty = document.getElementById("videoEmpty");
   if (!grid || !empty) return;
+  grid.innerHTML = "";
 
   const valid = VIDEOS.filter((v) => getVideoMeta(v));
   empty.hidden = valid.length > 0;
@@ -492,13 +582,14 @@ function renderVideos() {
 
   valid.forEach((video, i) => {
     const meta = getVideoMeta(video);
+    const poster = video.poster ? imageSrc(video.poster, 900) : meta.thumb;
     const card = document.createElement("button");
     card.type = "button";
     card.className = "video-card card";
     card.setAttribute("data-index", String(i));
     card.innerHTML =
       '<div class="video-card__thumb">' +
-      `<img src="${meta.thumb}" alt="${video.title || "Video mengajar"}" loading="lazy" ` +
+      `<img src="${poster}" alt="${video.title || "Video mengajar"}" loading="lazy" ` +
       `onerror="this.onerror=null;this.src='assets/img/placeholder-teaching.svg';">` +
       `<span class="video-card__badge${meta.type === "Drive" ? " video-card__badge--drive" : ""}">${meta.type}</span>` +
       '<span class="video-card__play"><span>▶</span></span>' +
@@ -506,6 +597,7 @@ function renderVideos() {
       '<div class="video-card__body">' +
       `<h3>${video.title || "Video Mengajar"}</h3>` +
       `<p>${video.desc || ""}</p>` +
+      (video.category ? `<span class="video-card__cat">${video.category}</span>` : "") +
       "</div>";
     card.addEventListener("click", () => openVideo(valid[i]));
     grid.appendChild(card);
@@ -549,14 +641,18 @@ function initVideoModal() {
   });
 }
 
-/* ---------- Boot ---------- */
-document.addEventListener("DOMContentLoaded", () => {
+/* ---------- Render semua bagian dinamis ---------- */
+function renderAll() {
   renderArtefak();
   renderLampiran();
   renderLk3();
+  renderVideos();
+}
+
+/* ---------- Inisialisasi UI ---------- */
+function initSite() {
   initTabs();
   initDocModal();
-  renderVideos();
   initVideoModal();
   initNavbar();
   initMobileMenu();
@@ -565,4 +661,39 @@ document.addEventListener("DOMContentLoaded", () => {
   initTheme();
   initToTop();
   initYear();
+}
+
+/* ---------- Boot ---------- */
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    const data = window.EPORTO_CONTENT
+      ? await window.EPORTO_CONTENT.loadContent()
+      : null;
+    if (data) {
+      if (data.cycles && Object.keys(data.cycles).length) {
+        SIKLUS_DATA = data.cycles;
+      }
+      if (data.videos && data.videos.length) {
+        VIDEOS = data.videos;
+      }
+      if (data.images && Object.keys(data.images).length) {
+        SITE_IMAGES = data.images;
+      }
+      if (data.lk3 && data.lk3.items && data.lk3.items.length) {
+        LK3_ITEMS = data.lk3.items;
+      }
+      if (data.lampiran && data.lampiran.items && data.lampiran.items.length) {
+        LAMPIRAN_ITEMS = data.lampiran.items;
+      }
+      if (data.artifacts && data.artifacts.length) {
+        ARTEFAK_ITEMS = data.artifacts;
+      }
+    }
+  } catch (error) {
+    console.warn("Konten CMS gagal dimuat, memakai data cadangan.", error);
+  }
+
+  applySiteImages();
+  renderAll();
+  initSite();
 });

@@ -1,121 +1,154 @@
-# Portofolio PPG — Ilham Kresnamurti, S.Kom.
+# E-Portofolio PPG Semester 2 — Ilham Kresnamurti, S.Kom.
 
-Remake situs Google Sites menjadi **HTML + CSS + JavaScript vanilla** dengan tampilan modern & simple.
-Semua konten asli (teks profil, keunikan daerah, inspirasi, artefak, model guru, refleksi) dipindahkan
-lengkap ke situs ini.
+Situs e-portofolio untuk Program Pendidikan Profesi Guru (PPG) Calon Guru Semester 2.
+Frontend statis (HTML/CSS/JavaScript) dengan admin berbasis **Sanity Studio** untuk
+mengubah foto dan menautkan dokumen/video Google Drive tanpa menyentuh kode.
 
-## Struktur
+## Arsitektur
 
 ```
-├── index.html          # Satu halaman (single page) berisi semua section
-├── css/style.css       # Tema modern: ringan, responsif, dark mode
-├── js/script.js        # Menu, tabs, scroll-spy, animasi, tema gelap
-├── assets/img/         # Tempat foto-foto Anda
-│   ├── placeholder-*.svg
-│   ├── hero.jpg        ← letakkan foto asli di sini (opsional)
-│   ├── profil-1.jpg    ←
-│   ├── candi-sukuh.jpg ← dst.
-├── server.js           # Server mini untuk pratinjau lokal (bukan bagian situs)
+┌─────────────────────────┐        ┌──────────────────────────┐
+│  Situs statis           │        │  Sanity Studio (admin)   │
+│  index.html + css/js    │◀───────│  edit foto, Drive, video  │
+│  (Vercel / GitHub Pages)│  API   │  https://….sanity.studio │
+└─────────────────────────┘        └──────────────────────────┘
+```
+
+- **Frontend** — `index.html`, `css/style.css`, `js/`.
+- **Admin** — folder `studio/`, schema Sanity untuk foto, siklus, LK 3, lampiran, dan video.
+- **Fallback** — selama CMS belum diisi atau gagal dimuat, situs memakai data cadangan di
+  `js/script.js`. Situs tetap bisa dibuka tanpa Sanity.
+
+## Struktur folder
+
+```
+├── index.html
+├── css/style.css
+├── js/
+│   ├── config.js          # projectId Sanity (diisi setelah project dibuat)
+│   ├── content.js         # query & normalisasi konten Sanity
+│   └── script.js          # data cadangan + render UI
+├── assets/img/            # foto fallback
+├── studio/                # Sanity Studio (admin)
+│   ├── schemas/           # model konten
+│   ├── seed.mjs           # generator konten awal
+│   ├── seed.ndjson        # konten awal siap impor
+│   └── sanity.config.ts
+├── server.js              # server lokal sederhana
 └── README.md
 ```
 
-## Menambahkan video mengajar
+## Menjalankan situs secara lokal
 
-Buka `js/script.js`, cari daftar `VIDEOS`, lalu tambahkan link Anda:
-
-```js
-const VIDEOS = [
-  { title: "Praktik Mengajar Siklus 1", desc: "Materi Algoritma & Flowchart",
-    url: "https://youtu.be/XXXXXXXXXXX" },
-  { title: "Praktik Mengajar Siklus 2", desc: "Materi HTML",
-    url: "https://drive.google.com/file/d/FILE_ID/view" },
-];
-```
-
-- **YouTube** — dukung `youtu.be/...`, `watch?v=...`, dan `shorts/...` (thumbnail diambil otomatis).
-- **Google Drive** — dukung `/file/d/...` dan `?id=...`. **Penting:** set video ke akses *Anyone with the link* agar bisa ditonton dari situs.
-- Video tampil sebagai kartu thumbnail, diklik → player muncul di modal (tanpa pindah halaman).
-- Selama daftar `VIDEOS` masih kosong, section menampilkan pesan "Belum ada video yang ditautkan".
-
-## Menautkan dokumen artefak (RPP, media, dll.)
-
-Buka `js/script.js`, cari daftar `ARTEFAK_ITEMS`. Setiap item punya:
-
-```js
-{
-  icon: "📄",
-  title: "Rencana Pelaksanaan Pembelajaran (RPP)",
-  slug: "rencana-pelaksanaan-pembelajaran-rpp",
-  note: "Perangkat pembelajaran lengkap",
-  desc: "Deskripsi singkat yang tampil di modal.",
-  driveId: "",                 // ← isi ID file Google Drive
-  images: [],                  // ← opsional: ["assets/img/rpp-1.jpg", ...]
-}
-```
-
-- **Cara mendapatkan ID Drive:** dari link `https://drive.google.com/file/d/1AbC...XYZ/view`,
-  ID-nya adalah bagian `1AbC...XYZ`.
-- Set file Drive ke akses **"Anyone with the link"** agar bisa ditampilkan.
-- Selama `driveId` masih kosong, modal menampilkan placeholder "belum ditautkan"
-  beserta deskripsi dokumennya. Prinsip situs ini: **semua dokumen tampil di dalam
-  situs sendiri — tanpa tautan ke Google Sites lama.**
-- `images` untuk galeri foto pendukung (letakkan fotonya di `assets/img/`).
-
-Format item yang sama dipakai oleh **`LAMPIRAN_ITEMS`** (section Lampiran) dan
-**`LK3_ITEMS`** (section Lembar Kerja 3 — Non-Mengajar) di `js/script.js` —
-isi `driveId` dengan cara yang sama agar dokumennya tampil langsung di situs.
-
-## Cara menjalankan
-
-Cara termudah: buka `index.html` langsung di browser (double-click).
-
-Atau pakai server lokal (fitur tabs & semuanya tetap jalan):
-
-```
+```bash
 node server.js
-# lalu buka http://localhost:8123
+# buka http://localhost:8123
 ```
 
-## Menambahkan foto asli
+Tanpa Sanity pun situs tetap tampil memakai data cadangan.
 
-Gambar dari CDN Google Sites tidak bisa diunduh, jadi saat ini dipakai placeholder SVG.
-Untuk menggantinya, letakkan file foto di `assets/img/` dengan nama sesuai yang dipanggil di `index.html`:
+## Menjalankan admin (Sanity Studio)
 
-| Nama file         | Untuk bagian                          |
-|-------------------|---------------------------------------|
-| `hero.jpg`        | Foto besar di halaman beranda         |
-| `profil-1.jpg`    | Foto profil "Tentang Saya"            |
-| `profil-2.jpg`    | Foto kartu "Tujuan Menjadi Guru"      |
-| `inspirasi.jpg`   | Foto kartu "Inspirasi Menjadi Guru"   |
-| `refleksi.jpg`    | Header section Refleksi               |
-| `candi-sukuh.jpg` | Candi Sukuh                           |
-| `grojogan-sewu.jpg` | Air Terjun Grojogan Sewu            |
-| `sate-kelinci.jpg`  | Sate Kelinci Tawangmangu            |
-| `jadah-tempe.jpg`   | Jadah Tempe                         |
+```bash
+cd studio
+copy .env.example .env
+# isi SANITY_STUDIO_PROJECT_ID di .env
+npm install
+npm run dev
+# buka http://localhost:3333
+```
 
-Jika file tidak ada, gambar otomatis menampilkan placeholder SVG (tanpa error).
+Login memakai akun Sanity (bisa lewat GitHub). Setelah project dibuat, isi juga
+`js/config.js`:
 
-## Catatan konten
+```js
+window.EPORTO_CONFIG = {
+  sanityProjectId: "project_id_anda",
+  sanityDataset: "production",
+  sanityApiVersion: "2025-02-19",
+};
+```
 
-- Kartu **Artefak Produk (Siklus 1–3)** dan **Lampiran** kini membuka **modal dokumen
-  di dalam situs** (deskripsi + embed PDF Google Drive + galeri foto) — tidak ada lagi
-  tautan yang mengarah ke halaman Google Sites lama.
-- Tautan kontak sudah diperbaiki (email `ilhammurti163@gmail.com`, WhatsApp `wa.me/62895415845020`,
-  Instagram `@krsnailh`, TikTok `@movitt11`) — tautan rusak dari versi Google Sites sudah dibetulkan.
+## Cara mengelola konten
 
-## Fitur
+Buka Studio, lalu pilih bagian berikut:
 
-- Navigasi sticky + scroll-spy (menu aktif otomatis mengikuti section)
-- Menu hamburger untuk HP
-- Tab Siklus 1/2/3 pada Artefak Produk
-- Accordion untuk 3 Refleksi
-- Tema gelap/terang (tersimpan di browser)
-- Animasi muncul saat scroll (menghormati prefers-reduced-motion)
-- 100% responsif (desktop, tablet, HP)
-- Tanpa framework — murni HTML/CSS/JS
+| Bagian | Isi |
+|---|---|
+| **Pengaturan Situs** | Judul, deskripsi, kontak, teks footer. |
+| **Foto Situs** | Foto hero, profil, tujuan guru, inspirasi, refleksi, dan 4 foto daerah. |
+| **Siklus 1–4** | Deskripsi siklus dan 6 artefak produk (RPP, media, hasil karya, dokumentasi, analisis, refleksi). |
+| **LK 3** | Laporan LK 3 dan dokumen pendukung. |
+| **Lampiran** | Dokumen penilaian, administrasi, dan kegiatan. |
+| **Galeri Video** | Link YouTube/Google Drive, kategori, thumbnail opsional. |
 
-## Cara online-kan (mis. GitHub Pages)
+Setiap kali selesai mengubah konten, klik **Publish**. Perubahan langsung tampil di situs
+setelah halaman dimuat ulang.
 
-1. Buat repository baru di GitHub, unggah seluruh isi folder ini.
-2. Buka **Settings → Pages → Branch: main → / (root) → Save**.
-3. Situs langsung dapat diakses di `https://<username>.github.io/<nama-repo>/`.
+### Menautkan Google Drive
+
+1. Unggah file ke Google Drive.
+2. Klik **Share** → ubah akses menjadi **Anyone with the link**.
+3. Salin link, lalu tempel ke kolom **Link Google Drive** pada item terkait.
+4. Untuk dokumen, link `/file/d/…/view` akan di-embed. Untuk folder, tombol
+   “Buka Dokumen di Google Drive” akan ditampilkan.
+5. Untuk video, link `/file/d/…/view` atau `?id=…` akan diputar di modal situs.
+
+> **Penting:** file harus publik (“Anyone with the link”), bukan “Restricted”, agar
+> bisa tampil di situs.
+
+### Mengunggah foto
+
+- Gunakan JPG/PNG/WebP.
+- Ukuran ideal: lebar 1200–1600 px, di bawah 2 MB per foto.
+- Isi **Teks alternatif** dengan deskripsi singkat foto.
+- Foto bisa di-crop/fokuskan lewat titik fokus (hotspot) di Studio.
+- Urutan foto dalam satu item bisa diubah dengan drag-and-drop.
+
+## Impor konten awal (sekali saja)
+
+```bash
+cd studio
+node seed.mjs
+npx sanity dataset import seed.ndjson production
+```
+
+Seed berisi 4 siklus, LK 3, lampiran, pengaturan situs, dan galeri video kosong.
+Foto belum disertakan — unggah lewat Studio.
+
+## Deploy
+
+### Opsi A — Vercel
+
+1. Hubungkan repository ini ke Vercel.
+2. Framework preset: **Other**; build command kosong; output directory: root.
+3. Tambahkan environment variable bila diperlukan (frontend hanya membaca `js/config.js`).
+4. Deploy.
+
+### Opsi B — GitHub Pages
+
+1. Buka **Settings → Pages**.
+2. Pilih branch `main`, folder `/ (root)`.
+3. Simpan. Situs tersedia di `https://<username>.github.io/<repo>/`.
+
+> GitHub Pages gratis untuk repository publik. Jika repository privat, gunakan Vercel
+> atau GitHub Pro.
+
+### Deploy Sanity Studio
+
+```bash
+cd studio
+npm run deploy
+# Studio tersedia di https://e-porto-ilham.sanity.studio
+```
+
+Jangan lupa menambahkan domain situs ke **CORS origins** di pengaturan project Sanity
+(`https://*.vercel.app`, domain produksi, dan `http://localhost:8123`).
+
+## Catatan
+
+- Repository lama `tugas-ppg` tetap dibiarkan sebagai cadangan.
+- Data Sanity tersimpan di Sanity Cloud, bukan di GitHub. Lakukan **Export** dataset
+  secara berkala dari dashboard Sanity.
+- Jangan mengubah ID dokumen singleton (`siteSettings`, `siteImages`, `lk3`,
+  `lampiran`, `videoGallery`) agar query frontend tetap menemukannya.

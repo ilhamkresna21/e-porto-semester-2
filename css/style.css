@@ -620,6 +620,16 @@ html[data-theme="dark"] .icon-moon { display: block; }
 .video-card__body { padding: 18px 22px 22px; }
 .video-card__body h3 { font-size: .99rem; margin-bottom: 6px; }
 .video-card__body p { color: var(--text-soft); font-size: .86rem; }
+.video-card__cat {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-size: .7rem;
+  font-weight: 700;
+}
 
 /* ---------- Modal player ---------- */
 .modal {
@@ -946,6 +956,7 @@ html[data-theme="dark"] .mini-card:nth-child(6n)   .mini-card__num { background:
   margin-top: 16px;
 }
 .doc-gallery:empty { display: none; }
+.doc-gallery figure { margin: 0; }
 .doc-gallery img {
   width: 100%;
   aspect-ratio: 4 / 3;
@@ -953,6 +964,15 @@ html[data-theme="dark"] .mini-card:nth-child(6n)   .mini-card__num { background:
   border-radius: 12px;
   border: 1px solid var(--border);
 }
+.doc-gallery figcaption {
+  margin-top: 6px;
+  color: var(--text-soft);
+  font-size: .76rem;
+}
+
+.doc-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.doc-actions:empty { display: none; }
+.btn--small { padding: 9px 16px; border-radius: 11px; font-size: .82rem; }
 
 /* ============================================================
    RESPONSIVE
