@@ -15,8 +15,9 @@
   },
   "images": {
     "hero": {
-      "url": "assets/img/hero.jpg",
-      "alt": "Suasana kegiatan PPG Ilham Kresnamurti"
+      "url": "assets/uploads/1793159536795-foto-hero-beranda-nnfis.jpg",
+      "alt": "Suasana kegiatan PPG Ilham Kresnamurti",
+      "caption": ""
     },
     "profile": {
       "url": "assets/img/profil-1.jpg",
