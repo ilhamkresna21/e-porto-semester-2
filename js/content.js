@@ -140,12 +140,20 @@
 
     const images = {};
     const rawImages = result.images || {};
-    ["hero", "profile", "profileSecondary", "inspiration", "reflection"].forEach(
-      (key) => {
-        const image = normalizeImage(rawImages[key]);
-        if (image && image.url) images[key] = image;
-      }
-    );
+    [
+      "hero",
+      "profile",
+      "profileSecondary",
+      "inspiration",
+      "reflection",
+      "candi-sukuh",
+      "grojogan-sewu",
+      "sate-kelinci",
+      "jadah-tempe",
+    ].forEach((key) => {
+      const image = normalizeImage(rawImages[key]);
+      if (image && image.url) images[key] = image;
+    });
 
     (rawImages.region || []).forEach((region) => {
       const image = normalizeImage(region);
@@ -197,9 +205,22 @@
     };
   }
 
-  async function loadContent() {
-    if (!projectId) return null;
+  async function loadLocalContent() {
+    try {
+      const response = await fetch(`content.json?v=${Date.now()}`, {
+        cache: "no-store",
+        headers: { Accept: "application/json" },
+      });
+      if (!response.ok) return null;
+      const payload = await response.json();
+      return normalizeData(payload);
+    } catch (error) {
+      console.warn("content.json belum tersedia; memakai data cadangan.", error);
+      return null;
+    }
+  }
 
+  async function loadSanityContent() {
     const endpoint =
       `https://${projectId}.api.sanity.io/v${apiVersion}/data/query/${dataset}` +
       `?query=${encodeURIComponent(QUERY)}`;
@@ -214,6 +235,20 @@
 
     const payload = await response.json();
     return normalizeData(payload.result);
+  }
+
+  async function loadContent() {
+    if (projectId) {
+      try {
+        return await loadSanityContent();
+      } catch (error) {
+        console.warn(
+          "Konten Sanity gagal dimuat; mencoba content.json.",
+          error
+        );
+      }
+    }
+    return loadLocalContent();
   }
 
   window.EPORTO_CONTENT = {

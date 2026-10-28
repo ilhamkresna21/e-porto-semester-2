@@ -1,154 +1,149 @@
 # E-Portofolio PPG Semester 2 — Ilham Kresnamurti, S.Kom.
 
-Situs e-portofolio untuk Program Pendidikan Profesi Guru (PPG) Calon Guru Semester 2.
-Frontend statis (HTML/CSS/JavaScript) dengan admin berbasis **Sanity Studio** untuk
-mengubah foto dan menautkan dokumen/video Google Drive tanpa menyentuh kode.
+Situs e-portofolio untuk Program Pendidikan Profesi Guru (PPG) Calon Guru
+Semester 2. Frontend statis (HTML/CSS/JavaScript) dengan halaman admin berbasis
+GitHub untuk mengubah foto dan menautkan dokumen/video Google Drive.
 
 ## Arsitektur
 
 ```
-┌─────────────────────────┐        ┌──────────────────────────┐
-│  Situs statis           │        │  Sanity Studio (admin)   │
-│  index.html + css/js    │◀───────│  edit foto, Drive, video  │
-│  (Vercel / GitHub Pages)│  API   │  https://….sanity.studio │
-└─────────────────────────┘        └──────────────────────────┘
+┌──────────────────────────────┐
+│  Situs statis (GitHub Pages) │
+│  index.html + css/js         │
+│  membaca content.json        │
+└──────────────┬───────────────┘
+               │
+┌──────────────▼───────────────┐
+│  Admin (/admin.html)         │
+│  login token GitHub          │
+│  edit foto, Drive, video     │
+│  simpan → commit content.json│
+└──────────────────────────────┘
 ```
 
 - **Frontend** — `index.html`, `css/style.css`, `js/`.
-- **Admin** — folder `studio/`, schema Sanity untuk foto, siklus, LK 3, lampiran, dan video.
-- **Fallback** — selama CMS belum diisi atau gagal dimuat, situs memakai data cadangan di
-  `js/script.js`. Situs tetap bisa dibuka tanpa Sanity.
+- **Admin** — `admin.html`, `css/admin.css`, `js/admin.js`.
+- **Konten** — `content.json` di root repository.
+- **Foto upload** — disimpan di `assets/uploads/` lewat GitHub API.
+- **Fallback** — jika `content.json` gagal dimuat, situs memakai data cadangan
+  di `js/script.js`.
 
 ## Struktur folder
 
 ```
-├── index.html
-├── css/style.css
+├── index.html              # halaman utama
+├── admin.html              # halaman admin (login token GitHub)
+├── content.json            # konten yang diedit lewat admin
+├── css/
+│   ├── style.css
+│   └── admin.css
 ├── js/
-│   ├── config.js          # projectId Sanity (diisi setelah project dibuat)
-│   ├── content.js         # query & normalisasi konten Sanity
-│   └── script.js          # data cadangan + render UI
-├── assets/img/            # foto fallback
-├── studio/                # Sanity Studio (admin)
-│   ├── schemas/           # model konten
-│   ├── seed.mjs           # generator konten awal
-│   ├── seed.ndjson        # konten awal siap impor
-│   └── sanity.config.ts
-├── server.js              # server lokal sederhana
+│   ├── config.js           # konfigurasi Sanity (opsional)
+│   ├── content.js          # memuat content.json / Sanity
+│   ├── script.js           # render situs + data cadangan
+│   └── admin.js            # editor admin GitHub
+├── assets/
+│   ├── img/                # foto fallback
+│   └── uploads/            # foto hasil upload admin
+├── studio/                 # Sanity Studio (opsional, belum aktif)
+├── server.js               # server lokal
 └── README.md
 ```
 
 ## Menjalankan situs secara lokal
 
 ```bash
-node server.js
+npm run dev
+# atau: node server.js
 # buka http://localhost:8123
 ```
 
-Tanpa Sanity pun situs tetap tampil memakai data cadangan.
+Situs akan memuat `content.json`. Tanpa admin pun situs tetap tampil.
 
-## Menjalankan admin (Sanity Studio)
+## Masuk ke admin
 
-```bash
-cd studio
-copy .env.example .env
-# isi SANITY_STUDIO_PROJECT_ID di .env
-npm install
-npm run dev
-# buka http://localhost:3333
-```
+1. Buka `http://localhost:8123/admin.html` (lokal) atau
+   `https://ilhamkresna21.github.io/e-porto-semester-2/admin.html` (online).
+2. Buat **fine-grained personal access token** di GitHub:
+   - Buka <https://github.com/settings/tokens?type=beta>.
+   - **Generate new token** → nama `E-Portofolio Admin`.
+   - Expiration: 90 hari.
+   - Repository access: **Only select repositories** → `e-porto-semester-2`.
+   - Permissions → **Contents: Read and write**.
+   - Generate, salin token.
+3. Tempel token di halaman admin, klik **Masuk & Muat Konten**.
+4. Token disimpan hanya di `localStorage` browser. Klik **Hapus token** setelah
+   selesai, terutama di komputer bersama.
 
-Login memakai akun Sanity (bisa lewat GitHub). Setelah project dibuat, isi juga
-`js/config.js`:
+> **Jangan pernah** menaruh token di dalam repository atau mengirimkannya ke
+> orang lain. Admin hanya mengirim token ke `api.github.com`.
 
-```js
-window.EPORTO_CONFIG = {
-  sanityProjectId: "project_id_anda",
-  sanityDataset: "production",
-  sanityApiVersion: "2025-02-19",
-};
-```
+## Mengelola konten
 
-## Cara mengelola konten
-
-Buka Studio, lalu pilih bagian berikut:
-
-| Bagian | Isi |
+| Tab | Isi |
 |---|---|
-| **Pengaturan Situs** | Judul, deskripsi, kontak, teks footer. |
 | **Foto Situs** | Foto hero, profil, tujuan guru, inspirasi, refleksi, dan 4 foto daerah. |
-| **Siklus 1–4** | Deskripsi siklus dan 6 artefak produk (RPP, media, hasil karya, dokumentasi, analisis, refleksi). |
+| **Siklus** | Label, deskripsi, dan 6 artefak produk per siklus (RPP, media, hasil karya, dokumentasi, analisis, refleksi). |
 | **LK 3** | Laporan LK 3 dan dokumen pendukung. |
 | **Lampiran** | Dokumen penilaian, administrasi, dan kegiatan. |
-| **Galeri Video** | Link YouTube/Google Drive, kategori, thumbnail opsional. |
+| **Video** | Link YouTube/Google Drive, kategori, thumbnail opsional. |
+| **Pengaturan** | Judul, deskripsi, dan tautan kontak. |
 
-Setiap kali selesai mengubah konten, klik **Publish**. Perubahan langsung tampil di situs
-setelah halaman dimuat ulang.
+Setelah selesai mengedit, klik **Simpan ke GitHub**. Admin akan membuat commit
+ke `content.json`; GitHub Pages memperbarui situs dalam 1–2 menit.
 
 ### Menautkan Google Drive
 
 1. Unggah file ke Google Drive.
-2. Klik **Share** → ubah akses menjadi **Anyone with the link**.
-3. Salin link, lalu tempel ke kolom **Link Google Drive** pada item terkait.
-4. Untuk dokumen, link `/file/d/…/view` akan di-embed. Untuk folder, tombol
-   “Buka Dokumen di Google Drive” akan ditampilkan.
-5. Untuk video, link `/file/d/…/view` atau `?id=…` akan diputar di modal situs.
+2. Klik **Share** → **Anyone with the link**.
+3. Salin link:
+   - File: `https://drive.google.com/file/d/ID_FILE/view`
+   - Folder: `https://drive.google.com/drive/folders/ID_FOLDER`
+4. Tempel di kolom **Link Google Drive** pada artefak/LK 3/lampiran.
+5. Untuk video, tempel link file Drive atau YouTube di tab **Video**.
 
-> **Penting:** file harus publik (“Anyone with the link”), bukan “Restricted”, agar
-> bisa tampil di situs.
+Dokumen file akan di-embed di modal. Link folder akan menampilkan tombol
+“Buka Dokumen di Google Drive”.
 
 ### Mengunggah foto
 
-- Gunakan JPG/PNG/WebP.
-- Ukuran ideal: lebar 1200–1600 px, di bawah 2 MB per foto.
-- Isi **Teks alternatif** dengan deskripsi singkat foto.
-- Foto bisa di-crop/fokuskan lewat titik fokus (hotspot) di Studio.
-- Urutan foto dalam satu item bisa diubah dengan drag-and-drop.
+- Format JPG/PNG/WebP. Foto otomatis dikompres ke lebar maksimal 1600 px.
+- Isi **Teks alternatif** untuk aksesibilitas.
+- Foto disimpan di `assets/uploads/` dan ikut ter-commit ke GitHub.
+- Urutan foto dalam satu item bisa diubah dengan menghapus/mengunggah ulang
+  (untuk saat ini belum ada drag-and-drop).
 
-## Impor konten awal (sekali saja)
+## Deploy ke GitHub Pages
 
-```bash
-cd studio
-node seed.mjs
-npx sanity dataset import seed.ndjson production
-```
+1. Pastikan repository **publik** (GitHub Pages gratis untuk repo publik).
+2. Buka **Settings → Pages**.
+3. Source: **Deploy from a branch** → branch `main` → folder `/ (root)` → **Save**.
+4. Situs tersedia di:
+   `https://ilhamkresna21.github.io/e-porto-semester-2/`
 
-Seed berisi 4 siklus, LK 3, lampiran, pengaturan situs, dan galeri video kosong.
-Foto belum disertakan — unggah lewat Studio.
+Admin ada di:
+`https://ilhamkresna21.github.io/e-porto-semester-2/admin.html`
 
-## Deploy
+> Jika repository tetap privat, gunakan Vercel atau GitHub Pro.
 
-### Opsi A — Vercel
+## Sanity Studio (opsional)
 
-1. Hubungkan repository ini ke Vercel.
-2. Framework preset: **Other**; build command kosong; output directory: root.
-3. Tambahkan environment variable bila diperlukan (frontend hanya membaca `js/config.js`).
-4. Deploy.
+Folder `studio/` berisi schema Sanity untuk admin alternatif. Saat ini fitur
+utama memakai admin GitHub, jadi Sanity **belum diaktifkan**. Untuk
+mengaktifkannya:
 
-### Opsi B — GitHub Pages
+1. Buat project Sanity.
+2. Isi `studio/.env` dan `js/config.js`.
+3. Impor `studio/seed.ndjson`.
+4. Jalankan `npm run dev` di `studio/`.
 
-1. Buka **Settings → Pages**.
-2. Pilih branch `main`, folder `/ (root)`.
-3. Simpan. Situs tersedia di `https://<username>.github.io/<repo>/`.
-
-> GitHub Pages gratis untuk repository publik. Jika repository privat, gunakan Vercel
-> atau GitHub Pro.
-
-### Deploy Sanity Studio
-
-```bash
-cd studio
-npm run deploy
-# Studio tersedia di https://e-porto-ilham.sanity.studio
-```
-
-Jangan lupa menambahkan domain situs ke **CORS origins** di pengaturan project Sanity
-(`https://*.vercel.app`, domain produksi, dan `http://localhost:8123`).
+Selama `js/config.js` masih kosong, situs memakai `content.json`.
 
 ## Catatan
 
+- Data konten tersimpan di `content.json` dan riwayat perubahannya ada di commit
+  GitHub.
+- Foto upload tersimpan di `assets/uploads/`.
+- Jangan menghapus `content.json` atau mengubah strukturnya secara manual tanpa
+  memahami formatnya.
 - Repository lama `tugas-ppg` tetap dibiarkan sebagai cadangan.
-- Data Sanity tersimpan di Sanity Cloud, bukan di GitHub. Lakukan **Export** dataset
-  secara berkala dari dashboard Sanity.
-- Jangan mengubah ID dokumen singleton (`siteSettings`, `siteImages`, `lk3`,
-  `lampiran`, `videoGallery`) agar query frontend tetap menemukannya.

@@ -516,6 +516,9 @@ html[data-theme="dark"] .icon-moon { display: block; }
   color: var(--text-soft);
   font-size: .84rem;
 }
+.footer__dot { margin: 0 8px; opacity: .5; }
+.footer__admin { color: var(--text-soft); font-size: .82rem; }
+.footer__admin:hover { color: var(--primary); }
 
 .to-top {
   position: fixed;
