@@ -1,0 +1,15 @@
+{
+  "name": "e-porto-semester-2",
+  "version": "1.0.0",
+  "private": true,
+  "description": "E-Portofolio PPG Calon Guru Semester 2 — Ilham Kresnamurti, S.Kom.",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ilhamkresna21/e-porto-semester-2.git"
+  },
+  "license": "UNLICENSED"
+}
