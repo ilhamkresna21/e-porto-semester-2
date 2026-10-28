@@ -1,0 +1,337 @@
+{
+  "settings": {
+    "siteTitle": "E-Portofolio Ilham Kresnamurti",
+    "siteDescription": "E-Portofolio PPG Calon Guru Semester 2 — Ilham Kresnamurti, S.Kom., PPG CAGUR UMS 2026.",
+    "heroEyebrow": "PPG Calon Guru — Semester 2",
+    "heroTitle": "Ilham Kresnamurti, S.Kom.",
+    "heroRole": "Mahasiswa PPG CAGUR UMS 2026",
+    "heroDescription": "Ruang dokumentasi perjalanan saya sebagai calon guru: perangkat pembelajaran, praktik mengajar, refleksi, dan karya murid.",
+    "whatsapp": "https://wa.me/62895415845020",
+    "email": "ilhammurti163@gmail.com",
+    "instagram": "https://www.instagram.com/krsnailh",
+    "tiktok": "https://www.tiktok.com/@movitt11",
+    "address": "Surakarta, Jawa Tengah",
+    "footerText": "E-Portofolio PPG Calon Guru Semester 2 — Ilham Kresnamurti, S.Kom."
+  },
+  "images": {
+    "hero": {
+      "url": "assets/img/hero.jpg",
+      "alt": "Suasana kegiatan PPG Ilham Kresnamurti"
+    },
+    "profile": {
+      "url": "assets/img/profil-1.jpg",
+      "alt": "Potret Ilham Kresnamurti"
+    },
+    "profileSecondary": {
+      "url": "assets/img/profil-2.jpg",
+      "alt": "Tujuan menjadi guru"
+    },
+    "inspiration": {
+      "url": "assets/img/inspirasi.jpg",
+      "alt": "Inspirasi menjadi guru"
+    },
+    "reflection": {
+      "url": "assets/img/refleksi.jpg",
+      "alt": "Refleksi perjalanan PPG"
+    },
+    "candi-sukuh": {
+      "url": "assets/img/candi-sukuh.jpg",
+      "alt": "Candi Sukuh"
+    },
+    "grojogan-sewu": {
+      "url": "assets/img/grojogan-sewu.jpg",
+      "alt": "Air Terjun Grojogan Sewu"
+    },
+    "sate-kelinci": {
+      "url": "assets/img/sate-kelinci.jpg",
+      "alt": "Sate Kelinci Tawangmangu"
+    },
+    "jadah-tempe": {
+      "url": "assets/img/jadah-tempe.jpg",
+      "alt": "Jadah Tempe"
+    }
+  },
+  "cycles": [
+    {
+      "number": 1,
+      "label": "Siklus 1",
+      "slug": "siklus-1",
+      "description": "Pada Siklus 1 ini terdapat beberapa artefak produk sebagai bagian dari dokumentasi proses pembelajaran: RPP, media pembelajaran, contoh hasil kerja murid, foto/video kegiatan pembelajaran, analisis produk, serta refleksi terhadap proses pembelajaran. Setiap bagian disusun untuk memberikan gambaran yang utuh mengenai perencanaan, pelaksanaan, hingga evaluasi pembelajaran yang telah dilakukan.",
+      "cover": null,
+      "artifacts": [
+        {
+          "icon": "📄",
+          "title": "Rencana Pelaksanaan Pembelajaran (RPP)",
+          "note": "Perangkat pembelajaran lengkap",
+          "description": "Rencana Pelaksanaan Pembelajaran berisi identitas sekolah, capaian pembelajaran, tujuan pembelajaran, materi ajar, tahapan kegiatan (pendahuluan, inti, penutup), penilaian, serta refleksi pembelajaran.",
+          "driveUrl": "",
+          "images": []
+        },
+        {
+          "icon": "🖥️",
+          "title": "Media Pembelajaran",
+          "note": "Media & sumber belajar digital",
+          "description": "Media dan sumber belajar yang digunakan dalam pembelajaran — slide presentasi, video interaktif, aplikasi simulasi, atau LKPD digital yang mendukung pemahaman murid terhadap materi.",
+          "driveUrl": "",
+          "images": []
+        },
+        {
+          "icon": "✍️",
+          "title": "Contoh Hasil Kerja Murid",
+          "note": "Bukti capaian belajar peserta didik",
+          "description": "Kumpulan contoh hasil karya peserta didik sebagai bukti capaian pembelajaran, lengkap dengan umpan balik dan rubrik penilaian yang digunakan.",
+          "driveUrl": "",
+          "images": []
+        },
+        {
+          "icon": "📸",
+          "title": "Foto / Video Pembelajaran",
+          "note": "Dokumentasi kegiatan di kelas",
+          "description": "Dokumentasi visual pelaksanaan pembelajaran di kelas: suasana kegiatan, interaksi guru–murid, serta aktivitas diskusi dan praktik peserta didik.",
+          "driveUrl": "",
+          "images": []
+        },
+        {
+          "icon": "📊",
+          "title": "Analisis Artefak Produk",
+          "note": "Analisis produk pembelajaran",
+          "description": "Analisis terhadap dokumen dan hasil pembelajaran: kekuatan, kelemahan, serta aspek yang perlu diperbaiki pada siklus berikutnya berdasarkan data dan observasi kelas.",
+          "driveUrl": "",
+          "images": []
+        },
+        {
+          "icon": "🔍",
+          "title": "Refleksi Artefak Produk",
+          "note": "Refleksi proses pembelajaran",
+          "description": "Refleksi menyeluruh atas perencanaan, pelaksanaan, dan evaluasi pembelajaran pada siklus ini — menjadi dasar perbaikan mutu pembelajaran secara berkelanjutan.",
+          "driveUrl": "",
+          "images": []
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "label": "Siklus 2",
+      "slug": "siklus-2",
+      "description": "Bagian Siklus 2 memuat dan mengulas berbagai artefak produk sebagai bentuk rekam jejak proses pembelajaran. Ragam instrumen yang ditampilkan meliputi RPP, media instruksional, lembar kerja hasil murid, rekaman visual kegiatan, analisis produk, dan refleksi pembelajaran. Melalui penyajian komparatif ini, diharapkan pembaca dapat melihat benang merah yang kuat antara desain kurikulum dengan realitas pembelajaran serta kompetensi yang berhasil diraih murid.",
+      "cover": null,
+      "artifacts": [
+        {
+          "icon": "📄",
+          "title": "Rencana Pelaksanaan Pembelajaran (RPP)",
+          "note": "Perangkat pembelajaran lengkap",
+          "description": "Rencana Pelaksanaan Pembelajaran berisi identitas sekolah, capaian pembelajaran, tujuan pembelajaran, materi ajar, tahapan kegiatan (pendahuluan, inti, penutup), penilaian, serta refleksi pembelajaran.",
+          "driveUrl": "",
+          "images": []
+        },
+        {
+          "icon": "🖥️",
+          "title": "Media Pembelajaran",
+          "note": "Media & sumber belajar digital",
+          "description": "Media dan sumber belajar yang digunakan dalam pembelajaran — slide presentasi, video interaktif, aplikasi simulasi, atau LKPD digital yang mendukung pemahaman murid terhadap materi.",
+          "driveUrl": "",
+          "images": []
+        },
+        {
+          "icon": "✍️",
+          "title": "Contoh Hasil Kerja Murid",
+          "note": "Bukti capaian belajar peserta didik",
+          "description": "Kumpulan contoh hasil karya peserta didik sebagai bukti capaian pembelajaran, lengkap dengan umpan balik dan rubrik penilaian yang digunakan.",
+          "driveUrl": "",
+          "images": []
+        },
+        {
+          "icon": "📸",
+          "title": "Foto / Video Pembelajaran",
+          "note": "Dokumentasi kegiatan di kelas",
+          "description": "Dokumentasi visual pelaksanaan pembelajaran di kelas: suasana kegiatan, interaksi guru–murid, serta aktivitas diskusi dan praktik peserta didik.",
+          "driveUrl": "",
+          "images": []
+        },
+        {
+          "icon": "📊",
+          "title": "Analisis Artefak Produk",
+          "note": "Analisis produk pembelajaran",
+          "description": "Analisis terhadap dokumen dan hasil pembelajaran: kekuatan, kelemahan, serta aspek yang perlu diperbaiki pada siklus berikutnya berdasarkan data dan observasi kelas.",
+          "driveUrl": "",
+          "images": []
+        },
+        {
+          "icon": "🔍",
+          "title": "Refleksi Artefak Produk",
+          "note": "Refleksi proses pembelajaran",
+          "description": "Refleksi menyeluruh atas perencanaan, pelaksanaan, dan evaluasi pembelajaran pada siklus ini — menjadi dasar perbaikan mutu pembelajaran secara berkelanjutan.",
+          "driveUrl": "",
+          "images": []
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "label": "Siklus 3",
+      "slug": "siklus-3",
+      "description": "Siklus 3 menjadi penutup dari rangkaian penyusunan artefak produk pembelajaran. Dokumen pada siklus ini menampilkan hasil perbaikan dari siklus sebelumnya, mulai dari RPP, media pembelajaran, hasil kerja murid, dokumentasi kegiatan, analisis, hingga refleksi akhir — sebagai bukti peningkatan mutu pembelajaran secara berkelanjutan.",
+      "cover": null,
+      "artifacts": [
+        {
+          "icon": "📄",
+          "title": "Rencana Pelaksanaan Pembelajaran (RPP)",
+          "note": "Perangkat pembelajaran lengkap",
+          "description": "Rencana Pelaksanaan Pembelajaran berisi identitas sekolah, capaian pembelajaran, tujuan pembelajaran, materi ajar, tahapan kegiatan (pendahuluan, inti, penutup), penilaian, serta refleksi pembelajaran.",
+          "driveUrl": "",
+          "images": []
+        },
+        {
+          "icon": "🖥️",
+          "title": "Media Pembelajaran",
+          "note": "Media & sumber belajar digital",
+          "description": "Media dan sumber belajar yang digunakan dalam pembelajaran — slide presentasi, video interaktif, aplikasi simulasi, atau LKPD digital yang mendukung pemahaman murid terhadap materi.",
+          "driveUrl": "",
+          "images": []
+        },
+        {
+          "icon": "✍️",
+          "title": "Contoh Hasil Kerja Murid",
+          "note": "Bukti capaian belajar peserta didik",
+          "description": "Kumpulan contoh hasil karya peserta didik sebagai bukti capaian pembelajaran, lengkap dengan umpan balik dan rubrik penilaian yang digunakan.",
+          "driveUrl": "",
+          "images": []
+        },
+        {
+          "icon": "📸",
+          "title": "Foto / Video Pembelajaran",
+          "note": "Dokumentasi kegiatan di kelas",
+          "description": "Dokumentasi visual pelaksanaan pembelajaran di kelas: suasana kegiatan, interaksi guru–murid, serta aktivitas diskusi dan praktik peserta didik.",
+          "driveUrl": "",
+          "images": []
+        },
+        {
+          "icon": "📊",
+          "title": "Analisis Artefak Produk",
+          "note": "Analisis produk pembelajaran",
+          "description": "Analisis terhadap dokumen dan hasil pembelajaran: kekuatan, kelemahan, serta aspek yang perlu diperbaiki pada siklus berikutnya berdasarkan data dan observasi kelas.",
+          "driveUrl": "",
+          "images": []
+        },
+        {
+          "icon": "🔍",
+          "title": "Refleksi Artefak Produk",
+          "note": "Refleksi proses pembelajaran",
+          "description": "Refleksi menyeluruh atas perencanaan, pelaksanaan, dan evaluasi pembelajaran pada siklus ini — menjadi dasar perbaikan mutu pembelajaran secara berkelanjutan.",
+          "driveUrl": "",
+          "images": []
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "label": "Siklus 4",
+      "slug": "siklus-4",
+      "description": "Siklus 4 merupakan kelanjutan dari siklus-siklus sebelumnya sebagai wujud perbaikan dan pemantapan mutu pembelajaran. Artefak pada siklus ini memuat RPP hasil peninjauan, media pembelajaran yang telah disempurnakan, contoh hasil kerja murid terbaru, dokumentasi kegiatan, analisis produk, serta refleksi akhir — menegaskan komitmen saya dalam menerapkan pembelajaran yang berpusat pada murid secara berkesinambungan.",
+      "cover": null,
+      "artifacts": [
+        {
+          "icon": "📄",
+          "title": "Rencana Pelaksanaan Pembelajaran (RPP)",
+          "note": "Perangkat pembelajaran lengkap",
+          "description": "Rencana Pelaksanaan Pembelajaran berisi identitas sekolah, capaian pembelajaran, tujuan pembelajaran, materi ajar, tahapan kegiatan (pendahuluan, inti, penutup), penilaian, serta refleksi pembelajaran.",
+          "driveUrl": "",
+          "images": []
+        },
+        {
+          "icon": "🖥️",
+          "title": "Media Pembelajaran",
+          "note": "Media & sumber belajar digital",
+          "description": "Media dan sumber belajar yang digunakan dalam pembelajaran — slide presentasi, video interaktif, aplikasi simulasi, atau LKPD digital yang mendukung pemahaman murid terhadap materi.",
+          "driveUrl": "",
+          "images": []
+        },
+        {
+          "icon": "✍️",
+          "title": "Contoh Hasil Kerja Murid",
+          "note": "Bukti capaian belajar peserta didik",
+          "description": "Kumpulan contoh hasil karya peserta didik sebagai bukti capaian pembelajaran, lengkap dengan umpan balik dan rubrik penilaian yang digunakan.",
+          "driveUrl": "",
+          "images": []
+        },
+        {
+          "icon": "📸",
+          "title": "Foto / Video Pembelajaran",
+          "note": "Dokumentasi kegiatan di kelas",
+          "description": "Dokumentasi visual pelaksanaan pembelajaran di kelas: suasana kegiatan, interaksi guru–murid, serta aktivitas diskusi dan praktik peserta didik.",
+          "driveUrl": "",
+          "images": []
+        },
+        {
+          "icon": "📊",
+          "title": "Analisis Artefak Produk",
+          "note": "Analisis produk pembelajaran",
+          "description": "Analisis terhadap dokumen dan hasil pembelajaran: kekuatan, kelemahan, serta aspek yang perlu diperbaiki pada siklus berikutnya berdasarkan data dan observasi kelas.",
+          "driveUrl": "",
+          "images": []
+        },
+        {
+          "icon": "🔍",
+          "title": "Refleksi Artefak Produk",
+          "note": "Refleksi proses pembelajaran",
+          "description": "Refleksi menyeluruh atas perencanaan, pelaksanaan, dan evaluasi pembelajaran pada siklus ini — menjadi dasar perbaikan mutu pembelajaran secara berkelanjutan.",
+          "driveUrl": "",
+          "images": []
+        }
+      ]
+    }
+  ],
+  "videos": [],
+  "lk3": {
+    "title": "Lembar Kerja 3",
+    "description": "Laporan kegiatan non-mengajar beserta dokumen pendukungnya.",
+    "items": [
+      {
+        "icon": "📄",
+        "title": "Laporan Lembar Kerja 3 (Non-Mengajar)",
+        "note": "Dokumen utama",
+        "description": "Laporan lengkap kegiatan non-mengajar: identitas peserta didik, latar belakang, tujuan, tahapan pelaksanaan kegiatan non-mengajar, hasil yang dicapai, hingga evaluasi dan tindak lanjut.",
+        "driveUrl": "",
+        "images": []
+      },
+      {
+        "icon": "📎",
+        "title": "Dokumen Pendukung",
+        "note": "Lampiran laporan",
+        "description": "Dokumen pendukung laporan kegiatan non-mengajar — lembar observasi, jadwal kegiatan, hasil karya, atau berkas pendukung lainnya.",
+        "driveUrl": "",
+        "images": []
+      }
+    ]
+  },
+  "lampiran": {
+    "title": "Lampiran",
+    "description": "Dokumen pendukung administrasi dan penilaian selama program PPG.",
+    "items": [
+      {
+        "icon": "📋",
+        "title": "Penilaian Penyusunan Perangkat Pembelajaran",
+        "note": "Lampiran",
+        "description": "Dokumen penilaian hasil penyusunan perangkat pembelajaran — skor, catatan pemeriksa, serta umpan balik untuk penyempurnaan RPP dan media pembelajaran.",
+        "driveUrl": "",
+        "images": []
+      },
+      {
+        "icon": "🎤",
+        "title": "Penilaian Praktik Mengajar",
+        "note": "Lampiran",
+        "description": "Hasil penilaian praktik mengajar selama program PPG — rubrik penilaian, skor tiap aspek, serta catatan pembimbing mengenai kinerja di ruang kelas.",
+        "driveUrl": "",
+        "images": []
+      },
+      {
+        "icon": "📸",
+        "title": "Foto / Video Kegiatan",
+        "note": "Lampiran",
+        "description": "Dokumentasi visual kegiatan pembelajaran dan praktik lapangan: suasana kelas, interaksi guru–murid, serta rangkaian kegiatan PPG.",
+        "driveUrl": "",
+        "images": []
+      }
+    ]
+  }
+}

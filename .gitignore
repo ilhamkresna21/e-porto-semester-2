@@ -6,3 +6,19 @@ Desktop.ini
 # Editor
 .vscode/
 .idea/
+
+# Dependencies
+node_modules/
+studio/node_modules/
+
+# Environment
+.env
+.env.local
+studio/.env
+studio/.env.local
+
+# Sanity
+.sanity/
+studio/.sanity/
+studio/dist/
+.sanity-login*.log

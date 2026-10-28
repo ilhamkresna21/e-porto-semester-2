@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin E-Portofolio — Ilham Kresnamurti</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%234f46e5'/><text x='50' y='66' font-size='46' font-family='Arial' font-weight='bold' text-anchor='middle' fill='white'>IK</text></svg>">
+</head>
+<body class="admin-body">
+
+  <header class="admin-header">
+    <div class="container admin-header__inner">
+      <a class="admin-brand" href="index.html">← Kembali ke situs</a>
+      <span class="admin-badge">Admin</span>
+      <button type="button" class="btn btn--ghost btn--small" id="logoutBtn" hidden>Hapus token</button>
+    </div>
+  </header>
+
+  <main class="container admin-main">
+    <section class="admin-login" id="loginView">
+      <span class="admin-kicker">Mode Admin</span>
+      <h1>Kelola E-Portofolio</h1>
+      <p class="admin-lead">
+        Masuk dengan token GitHub untuk mengubah foto, teks, dan link Google Drive.
+        Token hanya disimpan di browser ini dan tidak pernah dikirim ke mana pun
+        selain GitHub.
+      </p>
+
+      <div class="admin-card">
+        <div class="admin-field">
+          <label for="tokenInput">Token GitHub</label>
+          <input type="password" id="tokenInput" placeholder="github_pat_..." autocomplete="off">
+        </div>
+
+        <details class="admin-help">
+          <summary>Cara membuat token GitHub (sekali saja)</summary>
+          <ol>
+            <li>Buka <a href="https://github.com/settings/tokens?type=beta" target="_blank" rel="noopener">github.com/settings/tokens</a>.</li>
+            <li>Klik <strong>Generate new token</strong> → <strong>Fine-grained token</strong>.</li>
+            <li>Nama: <em>E-Portofolio Admin</em>. Expiration: 90 hari.</li>
+            <li>Repository access: <strong>Only select repositories</strong> → pilih <code>e-porto-semester-2</code>.</li>
+            <li>Permissions → <strong>Contents: Read and write</strong>.</li>
+            <li>Generate token, salin, lalu tempel di kolom di atas.</li>
+          </ol>
+          <p>
+            Alternatif token classic: buka
+            <a href="https://github.com/settings/tokens" target="_blank" rel="noopener">github.com/settings/tokens</a>,
+            pilih <strong>Generate new token (classic)</strong>, centang <code>public_repo</code>.
+          </p>
+        </details>
+
+        <div class="admin-field-row">
+          <div class="admin-field">
+            <label for="repoInput">Repository</label>
+            <input type="text" id="repoInput" value="ilhamkresna21/e-porto-semester-2">
+          </div>
+          <div class="admin-field">
+            <label for="branchInput">Branch</label>
+            <input type="text" id="branchInput" value="main">
+          </div>
+        </div>
+
+        <button type="button" class="btn btn--primary" id="loginBtn">Masuk &amp; Muat Konten</button>
+        <p class="admin-status" id="loginStatus" role="status"></p>
+      </div>
+
+      <p class="admin-note">
+        <strong>Penting:</strong> gunakan admin hanya di komputer pribadi. Setelah selesai,
+        klik <em>Hapus token</em> di kanan atas.
+      </p>
+    </section>
+
+    <section class="admin-editor" id="editorView" hidden>
+      <div class="admin-toolbar">
+        <div>
+          <span class="admin-kicker">Mode Admin</span>
+          <h1>Kelola Konten</h1>
+          <p class="admin-status" id="saveStatus" role="status">Memuat konten dari GitHub...</p>
+        </div>
+        <div class="admin-toolbar__actions">
+          <button type="button" class="btn btn--ghost btn--small" id="reloadBtn">Muat ulang</button>
+          <button type="button" class="btn btn--primary" id="saveBtn">Simpan ke GitHub</button>
+        </div>
+      </div>
+
+      <nav class="admin-tabs" id="adminTabs" aria-label="Bagian admin">
+        <button type="button" data-section="images" class="active">Foto Situs</button>
+        <button type="button" data-section="cycles">Siklus</button>
+        <button type="button" data-section="lk3">LK 3</button>
+        <button type="button" data-section="lampiran">Lampiran</button>
+        <button type="button" data-section="videos">Video</button>
+        <button type="button" data-section="settings">Pengaturan</button>
+      </nav>
+
+      <div class="admin-sections">
+        <section class="admin-section active" data-section="images" id="sectionImages"></section>
+        <section class="admin-section" data-section="cycles" id="sectionCycles"></section>
+        <section class="admin-section" data-section="lk3" id="sectionLk3"></section>
+        <section class="admin-section" data-section="lampiran" id="sectionLampiran"></section>
+        <section class="admin-section" data-section="videos" id="sectionVideos"></section>
+        <section class="admin-section" data-section="settings" id="sectionSettings"></section>
+      </div>
+    </section>
+  </main>
+
+  <div class="admin-toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>
