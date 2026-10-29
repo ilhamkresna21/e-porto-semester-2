@@ -282,7 +282,16 @@
       ]
     }
   ],
-  "videos": [],
+  "videos": [
+    {
+      "title": "Video Baru",
+      "description": "",
+      "url": "https://drive.google.com/file/d/1a_b4qWcxDBfAQkxensqcx9k2aIjf0OEm/view?usp=sharing",
+      "category": "Praktik Mengajar",
+      "cycle": "",
+      "poster": null
+    }
+  ],
   "lk3": {
     "title": "Lembar Kerja 3",
     "description": "Laporan kegiatan non-mengajar beserta dokumen pendukungnya.",
