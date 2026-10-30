@@ -270,9 +270,17 @@
   ],
   "videos": [
     {
-      "title": "Video Baru",
+      "title": "Video siklus 2",
       "description": "",
       "url": "https://drive.google.com/file/d/1a_b4qWcxDBfAQkxensqcx9k2aIjf0OEm/view?usp=sharing",
+      "category": "Praktik Mengajar",
+      "cycle": "",
+      "poster": null
+    },
+    {
+      "title": "Video siklus 3",
+      "description": "",
+      "url": "https://drive.google.com/file/d/1s2qoL8y_BOkk9arh17gbXgKgtKl47Cci/view?usp=sharing",
       "category": "Praktik Mengajar",
       "cycle": "",
       "poster": null
