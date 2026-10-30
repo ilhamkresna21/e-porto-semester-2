@@ -38,20 +38,24 @@
       "alt": "Refleksi perjalanan PPG"
     },
     "candi-sukuh": {
-      "url": "assets/img/candi-sukuh.jpg",
-      "alt": "Candi Sukuh"
+      "url": "assets/uploads/1793343766097-candi-sukuh-epduj.jpg",
+      "alt": "Candi Sukuh",
+      "caption": ""
     },
     "grojogan-sewu": {
-      "url": "assets/img/grojogan-sewu.jpg",
-      "alt": "Air Terjun Grojogan Sewu"
+      "url": "assets/uploads/1793343791150-grojogan-sewu-e2qkt.jpg",
+      "alt": "Air Terjun Grojogan Sewu",
+      "caption": ""
     },
     "sate-kelinci": {
-      "url": "assets/img/sate-kelinci.jpg",
-      "alt": "Sate Kelinci Tawangmangu"
+      "url": "assets/uploads/1793343820701-sate-kelinci-53bk6.jpg",
+      "alt": "Sate Kelinci Tawangmangu",
+      "caption": ""
     },
     "jadah-tempe": {
-      "url": "assets/img/jadah-tempe.jpg",
-      "alt": "Jadah Tempe"
+      "url": "assets/uploads/1793343842700-jadah-tempe-9e8iy.jpg",
+      "alt": "Jadah Tempe",
+      "caption": ""
     }
   },
   "cycles": [
