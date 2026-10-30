@@ -67,7 +67,7 @@
           "title": "Rencana Pelaksanaan Pembelajaran (RPP)",
           "note": "Perangkat pembelajaran lengkap",
           "description": "Rencana Pelaksanaan Pembelajaran berisi identitas sekolah, capaian pembelajaran, tujuan pembelajaran, materi ajar, tahapan kegiatan (pendahuluan, inti, penutup), penilaian, serta refleksi pembelajaran.",
-          "driveUrl": "",
+          "driveUrl": "https://docs.google.com/document/d/1YRecGAw-gIJEgLVuLerbMx9QmhhZz34F/edit",
           "images": []
         },
         {
@@ -87,27 +87,11 @@
           "images": []
         },
         {
-          "icon": "📸",
-          "title": "Foto / Video Pembelajaran",
-          "note": "Dokumentasi kegiatan di kelas",
-          "description": "Dokumentasi visual pelaksanaan pembelajaran di kelas: suasana kegiatan, interaksi guru–murid, serta aktivitas diskusi dan praktik peserta didik.",
-          "driveUrl": "",
-          "images": []
-        },
-        {
-          "icon": "📊",
-          "title": "Analisis Artefak Produk",
-          "note": "Analisis produk pembelajaran",
-          "description": "Analisis terhadap dokumen dan hasil pembelajaran: kekuatan, kelemahan, serta aspek yang perlu diperbaiki pada siklus berikutnya berdasarkan data dan observasi kelas.",
-          "driveUrl": "",
-          "images": []
-        },
-        {
           "icon": "🔍",
           "title": "Refleksi Artefak Produk",
           "note": "Refleksi proses pembelajaran",
           "description": "Refleksi menyeluruh atas perencanaan, pelaksanaan, dan evaluasi pembelajaran pada siklus ini — menjadi dasar perbaikan mutu pembelajaran secara berkelanjutan.",
-          "driveUrl": "",
+          "driveUrl": "https://docs.google.com/document/d/1a1vKzxnkBdx2c25py2bptJ85w-QF4Zso/edit?usp=sharing&ouid=100931160144072777978&rtpof=true&sd=true",
           "images": []
         }
       ]
@@ -303,7 +287,7 @@
         "title": "Laporan Lembar Kerja 3 (Non-Mengajar)",
         "note": "Dokumen utama",
         "description": "Laporan lengkap kegiatan non-mengajar: identitas peserta didik, latar belakang, tujuan, tahapan pelaksanaan kegiatan non-mengajar, hasil yang dicapai, hingga evaluasi dan tindak lanjut.",
-        "driveUrl": "",
+        "driveUrl": "https://docs.google.com/document/d/1CnBudYhqRPBlkk9bp8Uj2Fz5V7ORUC2M/edit?usp=sharing&ouid=100931160144072777978&rtpof=true&sd=true",
         "images": []
       },
       {
@@ -325,7 +309,7 @@
         "title": "Penilaian Penyusunan Perangkat Pembelajaran",
         "note": "Lampiran",
         "description": "Dokumen penilaian hasil penyusunan perangkat pembelajaran — skor, catatan pemeriksa, serta umpan balik untuk penyempurnaan RPP dan media pembelajaran.",
-        "driveUrl": "",
+        "driveUrl": "https://drive.google.com/file/d/1XSf-q8ZV1zGWQ12zj3TVlNla_y6T3Gw9/view?usp=sharing",
         "images": []
       },
       {
@@ -333,7 +317,7 @@
         "title": "Penilaian Praktik Mengajar",
         "note": "Lampiran",
         "description": "Hasil penilaian praktik mengajar selama program PPG — rubrik penilaian, skor tiap aspek, serta catatan pembimbing mengenai kinerja di ruang kelas.",
-        "driveUrl": "",
+        "driveUrl": "https://drive.google.com/file/d/1vNdP6c2FOaQ1CQ7YqXCXtexZkEcRL-Ae/view?usp=sharing",
         "images": []
       },
       {
@@ -342,7 +326,13 @@
         "note": "Lampiran",
         "description": "Dokumentasi visual kegiatan pembelajaran dan praktik lapangan: suasana kelas, interaksi guru–murid, serta rangkaian kegiatan PPG.",
         "driveUrl": "",
-        "images": []
+        "images": [
+          {
+            "url": "assets/uploads/1793337969934-foto-pendukung-n1oge.jpg",
+            "alt": "Foto pendukung",
+            "caption": ""
+          }
+        ]
       }
     ]
   }
